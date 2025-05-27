@@ -1,0 +1,53 @@
+name: Archipelago (Chiloé) Boostrap Barrio SASS
+type: theme
+description: 'Archipelago Sub Theme based on Bootstrap 5/SCSS.'
+# version: VERSION
+core: 10.x
+core_version_requirement: ^10
+base theme: bootstrap_barrio
+logo: 'logo.png'
+
+libraries:
+  - archipelago_subtheme_chiloe/global-styling
+libraries-override:
+  bootstrap_barrio/global-styling: false
+  bootstrap_barrio/affix:
+    js:
+      js/affix.js: js/overrides/affix-delayed.js
+  facets_searchbox_widget/searchbox:
+    js:
+      js/searchbox.js: js/overrides/searchbox.js
+  core/drupal.dialog.off_canvas:
+    css:
+      base:
+        misc/dialog/off-canvas/css/reset.css: false
+        misc/dialog/off-canvas/css/base.css: false
+regions:
+  top_header: 'Top header'
+  top_header_form: 'Top header form'
+  header: Header
+  header_form: 'Header form'
+  primary_menu: 'Primary menu'
+  secondary_menu: 'Secondary menu'
+  page_top: 'Page top'
+  page_bottom: 'Page bottom'
+  highlighted: Highlighted
+  featured_top: 'Featured top'
+  breadcrumb: Breadcrumb
+  content_top: 'Content 12 Columns width'
+  content_top_flex: 'Content 12 Columns flex'
+  breadcrumb_with_sidebar: 'Breadcrumb With Sidebars'
+  content: 'Content with Sidebars'
+  sidebar_first: 'Sidebar first'
+  sidebar_second: 'Sidebar second'
+  content_bottom: 'Content Bottom'
+  sidebar_first_bottom: 'Sidebar bottom first'
+  sidebar_second_bottom: 'Sidebar bottom second'
+  featured_bottom_first: 'Featured bottom first'
+  featured_bottom_second: 'Featured bottom second (left)'
+  featured_bottom_third: 'Featured bottom third (right)'
+  footer_first: 'Footer first'
+  footer_second: 'Footer second'
+  footer_third: 'Footer third'
+  footer_fourth: 'Footer fourth'
+  footer_fifth: 'Footer fifth'

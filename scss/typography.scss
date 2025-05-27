@@ -1,0 +1,112 @@
+/* TYPOGRAPHY */
+
+/* Google Fonts */
+
+//@import url("https://fonts.googleapis.com/css?family=Lato:400,300,300italic,400italic,700,700italic,900,900italic");
+//@import url("https://fonts.googleapis.com/css?family=Raleway:400,300,500,600,700,800,900");
+//
+//@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600;700&family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,700;0,900;1,400;1,700;1,900&display=swap');
+/* From Hamilton.edu */
+@import url('https://fonts.googleapis.com/css2?family=Biryani:wght@200;300;400;600;700;800;900&family=Jomolhari&display=swap');
+$font-family-sans-serif:  "Biryani", sans-serif;
+$font-family-monospace:  SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+$font-family-serif: "Jomolhari", serif;
+$font-family-base: $font-family-sans-serif;
+
+$font-size-base: 1rem; // Assumes the browser default, typically `16px`
+$font-size-lg: $font-size-base * 1.25;
+$font-size-sm: $font-size-base * .875;
+$font-size-xs: $font-size-base * .75;
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-bold: 800;
+$font-weight-medium: 600;
+$font-weight-base: $font-weight-normal;
+$line-height-base: 1.5;
+$h1-font-size: $font-size-base * 3;
+$h2-font-size: $font-size-base * 2.75;
+$h3-font-size: $font-size-base * 2.5;
+$h4-font-size: $font-size-base * 2;
+$h5-font-size: $font-size-base * 1.75;
+$h6-font-size: $font-size-base * 1.5;
+// Override
+$headings-font-family:  $font-family-sans-serif !default;
+$btn-font-weight: $font-weight-normal !default;
+$btn-font-family: $font-family-sans-serif;
+$navbar-brand-font-size: $font-size-base * 1.2;
+$navbar-brand-font-weight: $font-weight-light;
+$navbar-brand-font-size-md: $font-size-base * 1.2;
+$navbar-brand-font-size-mobile: $font-size-base * 1.2;
+$nav-link-font-weight: $font-weight-light;
+
+.navbar-brand {
+  font-family: $font-family-sans-serif;
+}
+.site-name-slogan {
+  font-size: $navbar-brand-font-size;
+}
+#navbar-main {
+  h1,h2,h3,h4,h5 {
+    font-family: $font-family-sans-serif;
+  }
+}
+dt {
+  font-family: $font-family-sans-serif;
+  font-size: $font-size-base * 1.2;
+}
+.content {
+  dt {
+    font-weight: $font-weight-normal;
+  }
+}
+
+.blockquote-footer {
+  margin-top: -0.5rem !important;
+}
+
+a {
+  &:hover {
+    text-decoration-color: var(--bs-quaternary, #{$quaternary-shade});
+  }
+}
+
+h1,h2,h3,h4,h5 {
+  &.fas > a {
+    font-family: $headings-font-family;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+  a {
+    &:hover {
+      text-decoration-color: var(--bs-quaternary, #{$quaternary-shade});
+    }
+  }
+}
+
+.view-header {
+  font-size: $font-size-base * 1.5;
+}
+.view-content {
+  h2 {
+    font-size: $h2-font-size * 0.7;
+  }
+  h3 {
+    font-size: $h3-font-size * 0.7;
+  }
+  h4 {
+    font-size: $h4-font-size * 0.7;
+  }
+  h5 {
+    font-size: $h5-font-size * 0.7;
+  }
+  h6 {
+    font-size: $h6-font-size * 0.7;
+  }
+}
+
+:root {
+  .btn.adv-search-addone, .btn.adv-search-delone {
+    font-weight: 800;
+    --bs-body-font-weight: $font-weight-bold;
+  }
+}

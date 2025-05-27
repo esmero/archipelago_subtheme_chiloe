@@ -1,0 +1,201 @@
+/* VARIABLES */
+@use 'sass:color';
+// colors
+$primary-shade: rgb(254, 32, 118);
+$primary-light: lighten($primary-shade, 35%);
+$primary-dark: darken($primary-shade, 10%);
+$accent-shade: rgb(97, 211, 157);
+$accent-light: desaturate(lighten($accent-shade, 15%), 60);
+$accent-light-rgb: red($accent-light), green($accent-light), blue($accent-light);
+$accent-dark: darken($accent-shade, 10%);
+$tertiary-shade: $accent-shade;
+$accent-alternate-shade: rgb(195,	162,	252)	;
+$quaternary-shade: rgb(243, 166, 200);
+$quaternary-shade-rgba:  rgb(243, 166, 200, 0.8);
+$btn-active-border-shade-amount:  25% !default;
+// Reassign color vars to semantic color scheme
+$red: #ab2328;
+$yellow: #ffc107;
+$green: #28a745;
+$cyan: #17a2b8;
+$white: #fff;
+$black: #000;
+$light-pink: #fcfafa;
+$gray-100: #d0d0d0;
+$gray-400: #424242;
+$gray-600: #363436;
+$gray-800: rgb(66,69,71); // Greenish grey
+/* Bootstrap Barrio's SCSS 5.02 base theme introduced a bug, let's try to override to make gulp happy
+@see https://www.drupal.org/project/bootstrap_sass/issues/3365211
+@todo remove once the above issue is solved
+ */
+$table-border-width : 1px;
+
+$theme-colors: (primary: $primary-shade, secondary: $accent-shade, tertiary: $tertiary-shade, quaternary:$quaternary-shade, success:$green, info: $cyan, warning: $yellow, danger: $red, light: $gray-100, dark: $gray-800);
+$brand-primary: $white;
+$brand-inverse: $quaternary-shade;
+
+$body-bg: $light-pink;
+$body-color: $gray-800;
+$inverse-bg: $primary-shade;
+$inverse-color: $white;
+// Links
+//
+// Style anchor elements.
+$link-color: $primary-shade;
+$link-decoration: none;
+$link-hover-color: $primary-shade;
+$link-hover-decoration: underline;
+// Comments
+$comment-spacer-x: 1.25em;
+$comment-spacer-y: 1.25em;
+// Responsive font sizes
+$enable-responsive-font-sizes: true;
+$enable-shadows: false;
+$enable-gradients: false;
+// Breadcrumbs (Works only on Bootstrap 5+)
+$breadcrumb-divider: quote(">");
+
+// Headings means H1-H6
+$headings-color: $gray-800;
+
+
+//Input and buttons
+$btn-white-space: nowrap;
+$border-radius: 1rem!default;
+
+$input-border-radius:                   1rem !default;
+$input-border-radius-sm:                $input-border-radius;
+$input-border-radius-lg:               $input-border-radius;
+$btn-border-radius:          $input-border-radius !default;
+$btn-border-radius-sm:       $input-border-radius-sm !default;
+$btn-border-radius-lg:       $input-border-radius-lg !default;
+$input-btn-line-height:  1.75 !default;
+$btn-line-height: 1.75 !default;
+
+  // Pagination
+$pagination-border-radius:  1rem !default;
+$pagination-hover-bg: map-get($theme-colors,"primary");
+$pagination-color: $body-color;
+$pagination-hover-color: $inverse-color;
+
+$input-btn-padding-y: 0.625rem !default;
+$input-btn-padding-x:  1.25rem !default;
+
+/* Carousel */
+$carousel-indicator-width: 80%;
+$carousel-indicator-height: 80%;
+$carousel-indicator-active-bg: $accent-shade;
+$carousel-indicator-hit-area-height: 0.5rem;
+$carousel-indicator-opacity: 1;
+$carousel-control-width: 5%;
+$carousel-indicator-transition: opacity 0.5s, margin-right 0.5s;
+
+:root {
+  .archipelago-chiloe-theme {
+    // Overrides from root see https://getbootstrap.com/docs/5.1/customize/css-variables/
+    --bs-light-rgb: var(--bs-tertiary-rgb, #{$accent-light-rgb});
+    --bs-btn-hover-bg: #{darken($primary-shade, 10%)};
+    --bs-secondary-rgb: #{$brand-primary};
+    --bs-link-color: var(--bs-link-color, #{$link-color});
+    --bs-btn-bg: var(--bs-primary, #{$primary-shade});
+
+    .nav-pills {
+      --bs-nav-pills-link-active-color: var(--bs-quaternary, #{$quaternary-shade});
+      --bs-nav-pills-link-active-bg: none;
+    }
+
+    .navbar-toggler {
+      --bs-navbar-toggler-border-color: transparent !important;
+    }
+
+    .breadcrumb {
+      --bs-breadcrumb-margin-bottom: 1rem;
+    }
+
+    .btn-primary:active, .btn-primary:focus:active {
+      --bs-btn-color: var(--bs-link-color, #{$link-color});
+      --bs-btn-active-color: #{white};
+      --bs-btn-active-bg:  var(--bs-quaternary, #{$quaternary-shade});
+      --bs-btn-active-border-color: #{white};
+      --bs-btn-bg: #{$white};
+    }
+
+    .btn-secondary {
+      --bs-btn-bg: transparent;
+      --bs-btn-color:var(--bs-link-color, #{$link-color});
+      --bs-btn-active-color: white;
+      --bs-btn-active-bg: var(--bb-secondary-light, #{$accent-light});
+      --bs-btn-border-color: var(--bs-link-color, #{$link-color});
+      --bs-btn-hover-color:  var(--bs-link-hover-color, #{$quaternary-shade});
+      --bs-btn-hover-bg: var(--bs-link-color, #{$link-color});
+      --bs-btn-hover-border-color: var(--bs-link-color, #{$link-color});
+
+      &:hover {
+        //--bs-btn-active-bg: #{$link-color};
+        //--bs-btn-active-color: #{$white};
+
+        a {
+          // color: #{$quaternary-shade};
+          text-decoration: none;
+        }
+      }
+
+      a {
+        text-decoration: none;
+
+        &:hover {
+          // color: $quaternary-shade;
+          text-decoration: none;
+        }
+
+      }
+    }
+
+    .btn-tertiary {
+      --bs-btn-color: white;
+      --bs-btn-bg: var(--bs-tertiary, #{$tertiary-shade});
+      --bs-btn-active-color: white;
+      --bs-btn-active-bg: var(--bb-tertiary-light, #{$accent-alternate-shade});
+      --bs-btn-border-color: transparent;
+      &:hover {
+        --bs-btn-active-bg: var(--bs-link-hover-color, #{$link-color});
+        --bs-btn-active-color: #{$white};
+        a {
+          color: var(--bs-link-color, #{$link-color});
+          text-decoration: none;
+        }
+      }
+
+      a {
+        text-decoration: none;
+        color: white;
+
+        &:hover {
+          color: var(--bs-link-color, #{$link-color});
+          text-decoration: none;
+        }
+      }
+
+    }
+
+    .list-group {
+      --bs-list-group-item-padding-x: 1rem;
+      --bs-list-group-item-padding-y: 0.5rem;
+      // --bs-list-group-action-hover-color: $accent-shade;
+      // --bs-list-group-action-hover-bg: #{$accent-shade};
+      // --bs-list-group-action-active-bg: #{$quaternary-shade};
+      // --bs-list-group-active-bg: #{$quaternary-shade};
+      //--bs-list-group-active-border-color: #{$quaternary-shade};
+    }
+  }
+}
+
+/* header nav overrides */
+$navbar-dark-bg-active-color: $primary-dark !default;
+$navbar-dark-hover-color: $white !default;
+$navbar-light-bg-active-color: $quaternary-shade !default;
+$navbar-light-hover-color: $quaternary-shade !default;
+$navbar-padding-y: 0;
+
+

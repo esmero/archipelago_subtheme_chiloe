@@ -1,0 +1,16 @@
+{#
+/**
+ * @file
+ * Theme override for an 'input' #type form element.
+ *
+ * Available variables:
+ * - attributes: A list of HTML attributes for the input element.
+ * - children: Optional additional rendered elements.
+ *
+ * @see template_preprocess_input()
+ */
+#}
+{% if attributes.name is defined and attributes.name == 'search_api_fulltext' %}
+  {%  set attributes = attributes.setAttribute('size', '100')  %}
+{% endif %}
+<input{{ attributes.addClass("form-control").removeClass("form-text") }} />{{ children }}

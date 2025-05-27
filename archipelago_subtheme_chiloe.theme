@@ -1,0 +1,347 @@
+<?php
+
+/**
+ * @file
+ * Functions to support theming in the SASS Starterkit subtheme.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_system_theme_settings_alter() for settings form.
+ *
+ * Replace Barrio setting options with subtheme ones.
+ */
+function archipelago_subtheme_chiloe_form_system_theme_settings_alter(&$form, FormStateInterface $form_state) {
+
+  $color_config = [
+    'colors' => [
+      'bootstrap_barrio_base_primary_color' => 'Primary base color',
+      'bootstrap_barrio_base_secondary_color' => 'Secondary base color',
+      'bootstrap_barrio_base_tertiary_color' => 'Tertiary base color',
+      'bootstrap_barrio_base_quaternary_color' => 'Quaternary base color',
+    ],
+    'schemes' => [
+      'archipelago' => [
+        'label' => 'Archipelago Commons Dumpling Pink',
+        'colors' => [
+          'bootstrap_barrio_base_primary_color' => '#FE2076',
+          'bootstrap_barrio_base_secondary_color' => '#61D39D',
+          'bootstrap_barrio_base_tertiary_color' => '#2F3C7E',
+          'bootstrap_barrio_base_quaternary_color' => '#F3A6C8',
+        ],
+      ],
+      'default' => [
+        'label' => 'Blue & pink',
+        'colors' => [
+          'bootstrap_barrio_base_primary_color' => '#2F3C7E',
+          'bootstrap_barrio_base_secondary_color' => '#FBEAEB',
+          'bootstrap_barrio_base_tertiary_color' => '#FFFFFF',
+          'bootstrap_barrio_base_quaternary_color' => '#FFFFFF',
+        ],
+      ],
+      'blue_peach' => [
+        'label' => 'Royal blue & peach',
+        'colors' => [
+          'bootstrap_barrio_base_primary_color' => '#00539C',
+          'bootstrap_barrio_base_secondary_color' => '#EEA47F',
+          'bootstrap_barrio_base_tertiary_color' => '#FFFFFF',
+          'bootstrap_barrio_base_quaternary_color' => '#FFFFFF',
+        ],
+      ],
+      'red_yellow' => [
+        'label' => 'Red & yellow',
+        'colors' => [
+          'bootstrap_barrio_base_primary_color' => '#F96167',
+          'bootstrap_barrio_base_secondary_color' => '#F9E795',
+          'bootstrap_barrio_base_tertiary_color' => '#FFFFFF',
+          'bootstrap_barrio_base_quaternary_color' => '#FFFFFF',
+        ],
+      ],
+      'peach_orange' => [
+        'label' => 'Peach & burnt orange',
+        'colors' => [
+          'bootstrap_barrio_base_primary_color' => '#FCEDDA',
+          'bootstrap_barrio_base_secondary_color' => '#EE4E34',
+          'bootstrap_barrio_base_tertiary_color' => '#FFFFFF',
+          'bootstrap_barrio_base_quaternary_color' => '#FFFFFF',
+        ],
+      ],
+      'red_pink' => [
+        'label' => 'Cherry red & bubblegum pink',
+        'colors' => [
+          'bootstrap_barrio_base_primary_color' => '#CC313D',
+          'bootstrap_barrio_base_secondary_color' => '#F7C5CC',
+          'bootstrap_barrio_base_tertiary_color' => '#FFFFFF',
+          'bootstrap_barrio_base_quaternary_color' => '#FFFFFF',
+        ],
+      ],
+      'purple_mint' => [
+        'label' => 'Light purple, mint',
+        'colors' => [
+          'bootstrap_barrio_base_primary_color' => '#AA96DA',
+          'bootstrap_barrio_base_secondary_color' => '#FFFFD2',
+          'bootstrap_barrio_base_tertiary_color' => '#FFFFFF',
+          'bootstrap_barrio_base_quaternary_color' => '#FFFFFF',
+        ],
+      ],
+      'blue_yellow' => [
+        'label' => 'Royal blue & pale yellow',
+        'colors' => [
+          'bootstrap_barrio_base_primary_color' => '#234E70',
+          'bootstrap_barrio_base_secondary_color' => '#FBF8BE',
+          'bootstrap_barrio_base_tertiary_color' => '#FFFFFF',
+          'bootstrap_barrio_base_quaternary_color' => '#FFFFFF',
+        ],
+      ],
+      'scarlet_olive' => [
+        'label' => 'Scarlet, light olive',
+        'colors' => [
+          'bootstrap_barrio_base_primary_color' => '#B85042',
+          'bootstrap_barrio_base_secondary_color' => '#E7E8D1',
+          'bootstrap_barrio_base_tertiary_color' => '#FFFFFF',
+          'bootstrap_barrio_base_quaternary_color' => '#FFFFFF',
+        ],
+      ],
+    ],
+  ];
+
+  $form['#attached']['drupalSettings']['barrio']['colorSchemes'] = $color_config['schemes'];
+
+  if ($form_state->getValue('bootstrap_barrio_enable_color', theme_get_setting('bootstrap_barrio_enable_color'))) {
+    $form['colors']['scheme']['color_container']['bootstrap_barrio_color_scheme'] = [
+      '#type' => 'select',
+      '#title' => t('Barrio Color Scheme'),
+      '#empty_option' => t('Custom'),
+      '#empty_value' => '',
+      '#options' => [
+        'archipelago' => t('Archipelago Commons Dumpling Pink'),
+        'default' => t('Blue & pink (Default)'),
+        'blue_peach' => t('Royal blue & peach'),
+        'red_yellow' => t('Red & yellow'),
+        'peach_orange' => t('Peach & burnt orange'),
+        'red_pink' => t('Cherry red & bubblegum pink'),
+        'purple_mint' => t('Light purple, mint'),
+        'blue_yellow' => t('Royal blue & pale yellow'),
+        'scarlet_olive' => t('Scarlet, light olive'),
+      ],
+      '#input' => FALSE,
+      '#wrapper_attributes' => [
+        'style' => 'display:none;',
+      ],
+    ];
+    foreach ($color_config['colors'] as $key => $title) {
+      $form['colors']['scheme']['color_container'][$key] = [
+        '#type' => 'textfield',
+        '#maxlength' => 7,
+        '#size' => 10,
+        '#title' => t($title),
+        '#description' => t('Enter color in full hexadecimal format (#abc123).') . '<br/>' . t('Derivatives will be formed from this color.'),
+        '#default_value' => theme_get_setting($key),
+        '#attributes' => [
+          'pattern' => '^#[a-fA-F0-9]{6}',
+        ],
+        '#wrapper_attributes' => [
+          'data-drupal-selector' => 'barrio-color-picker',
+        ],
+      ];
+    }
+    $form['colors']['scheme']['color_container']['bootstrap_barrio_body_color'] = [
+      '#type' => 'select',
+      '#title' => t('Body color'),
+      '#default_value' => theme_get_setting('bootstrap_barrio_body_color') ?? 'gray-800',
+      '#options' => [
+        'gray-800' => t('Dark gray'),
+        'black' => t('Black'),
+      ],
+    ];
+
+    $form['colors']['scheme']['color_container']['bootstrap_barrio_body_color'] = [
+      '#type' => 'select',
+      '#title' => t('Body color'),
+      '#default_value' => theme_get_setting('bootstrap_barrio_body_color') ?? 'gray-800',
+      '#options' => [
+        'gray-800' => t('Dark gray'),
+        'black' => t('Black'),
+      ],
+    ];
+    $form['colors']['scheme']['color_container']['bootstrap_barrio_body_bg_color'] = [
+      '#type' => 'select',
+      '#title' => t('Body Background Color'),
+      '#default_value' => theme_get_setting('bootstrap_barrio_body_bg_color') ?? 'white',
+      '#options' => [
+        'white' => t('White'),
+        'gray-200' => t('Light gray'),
+      ],
+    ];
+    $form['colors']['scheme']['color_container']['bootstrap_barrio_footer_bg_color'] = [
+      '#type' => 'select',
+      '#title' => t('Footer Background Color'),
+      '#default_value' => theme_get_setting('bootstrap_barrio_footer_bg_color') ?? 'white',
+      '#options' => [
+        'white' => t('White'),
+        'gray-200' => t('Light gray'),
+        'black' => t('Black'),
+        'base' => t('Base color'),
+        'primary' => t('Primary color'),
+        'secondary' => t('Secondary color'),
+        'tertiary' => t('Tertiary color'),
+        'quaternary' => t('Quaternary color'),
+      ],
+    ];
+
+    $form['colors']['scheme']['color_container']['bootstrap_barrio_h1_color'] = [
+      '#type' => 'select',
+      '#title' => t('H1 color'),
+      '#default_value' => theme_get_setting('bootstrap_barrio_h1_color') ?? 'base',
+      '#options' => [
+        'base' => t('Base color'),
+        'primary' => t('Primary color'),
+        'secondary' => t('Secondary color'),
+        'tertiary' => t('Tertiary color'),
+        'quaternary' => t('Quaternary color'),
+      ],
+    ];
+    $form['colors']['scheme']['color_container']['bootstrap_barrio_h2_color'] = [
+      '#type' => 'select',
+      '#title' => t('H2 color'),
+      '#default_value' => theme_get_setting('bootstrap_barrio_h2_color') ?? 'base',
+      '#options' => [
+        'base' => t('Base color'),
+        'primary' => t('Primary color'),
+        'secondary' => t('Secondary color'),
+        'tertiary' => t('Tertiary color'),
+        'quaternary' => t('Quaternary color'),
+      ],
+    ];
+    $form['colors']['scheme']['color_container']['bootstrap_barrio_h3_color'] = [
+      '#type' => 'select',
+      '#title' => t('H3 color'),
+      '#default_value' => theme_get_setting('bootstrap_barrio_h3_color') ?? 'base',
+      '#options' => [
+        'base' => t('Base color'),
+        'primary' => t('Primary color'),
+        'secondary' => t('Secondary color'),
+        'tertiary' => t('Tertiary color'),
+        'quaternary' => t('Quaternary color'),
+        ]
+    ];
+  }
+
+  $form['components']['navbar']['bootstrap_barrio_navbar_top_background']['#options'] = array(
+    'bg-primary' => t('Primary'),
+    'bg-secondary' => t('Secondary'),
+    'bg-tertiary' => t('Tertiary'),
+    'bg-quaternary' => t('Quaternary'),
+    'bg-light' => t('Light'),
+    'bg-dark' => t('Dark'),
+    'bg-white' => t('White'),
+    'bg-transparent' => t('Transparent'),
+  );
+  $form['components']['navbar']['bootstrap_barrio_navbar_background']['#options'] = array(
+    'bg-primary' => t('Primary'),
+    'bg-secondary' => t('Secondary'),
+    'bg-tertiary' => t('Tertiary'),
+    'bg-quaternary' => t('Quaternary'),
+    'bg-light' => t('Light'),
+    'bg-dark' => t('Dark'),
+    'bg-white' => t('White'),
+    'bg-transparent' => t('Transparent'),
+  );
+
+  $form['components']['footer'] = [
+    '#type' => 'details',
+    '#title' => t('General Footer Settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  ];
+  $form['components']['footer']['bootstrap_barrio_footer_height'] = [
+    '#type' => 'textfield',
+    '#suffix' => 'em',
+    '#title' => t('Footer Height in <em>em</em>. Don\'t include em.'),
+    '#default_value' => theme_get_setting('bootstrap_barrio_footer_height') ?? '20',
+  ];
+
+}
+
+/**
+ * Prepares variables for `breadcrumb.html.twig`.
+ */
+function archipelago_subtheme_chiloe_preprocess_breadcrumb(&$variables){
+  // Remove 'Home' from breadcrumb trail.
+  if (count($variables['breadcrumb'])) {
+    array_shift($variables['breadcrumb']);
+  }
+  $variables['#cache']['contexts'][] = 'url';
+}
+
+function archipelago_subtheme_chiloe_preprocess_html(&$variables) {
+  // Color settings
+  bootstrap_barrio_preprocess_html($variables);
+
+  if (theme_get_setting('bootstrap_barrio_enable_color')) {
+    // Sadly i have to duplicate this if we want to be able to customize the footer
+    $gray200 = '#e9ecef';
+    $gray800 = '#343a40';
+    $white = '#fff';
+    $pc = theme_get_setting('bootstrap_barrio_base_primary_color') ?? '#2F3C7E';
+    $pcrgb = _hex2rgb( $pc );
+    $pcd = _color_luminance($pc, -0.15);
+    $bc = '#000';
+    $pct = _getContrastColor($pc, $white, $bc);
+    $sc = theme_get_setting('bootstrap_barrio_base_secondary_color') ?? '#FBEAEB';
+    $scrgb = _hex2rgb( $sc );
+    $scd = _color_luminance($sc, -0.15);
+    $sct = _getContrastColor($sc, $white, $gray800);
+    $colors = [
+      'white' => $white,
+      'black' => '#000',
+      'gray-200' => $gray200,
+      'gray-800' => $gray800,
+      'primary' => $pc,
+      'secondary' => $sc,
+    ];
+    $base = _get_color(theme_get_setting('bootstrap_barrio_body_color') ?? 'gray-800', $colors);
+    $colors['base'] = $base;
+
+    $tc = theme_get_setting('bootstrap_barrio_base_tertiary_color') ?? '#61D39D';
+    $tcrgb = _hex2rgb( $tc );
+    $tcd = _color_luminance($tc, -0.15);
+    $tct =_color_luminance($tc, 0.1);
+    $qc = theme_get_setting('bootstrap_barrio_base_quaternary_color') ?? '#FE2076';
+    $qcrgb = _hex2rgb( $qc );
+    $qcd = _color_luminance($qc, -0.15);
+    $qct = _color_luminance($qc, 0.1);
+    $colors = $colors + [
+      'tertiary' => $tc,
+      'quaternary' => $qc,
+    ];
+    error_log(print_r($colors,true));
+    $color_footer_key = theme_get_setting('bootstrap_barrio_footer_bg_color') ?? 'tertiary';
+    if (isset($colors[$color_footer_key])) {
+      $color_footer = $colors[$color_footer_key];
+    }
+    else {
+      $color_footer = 'white';
+    }
+
+    $styles = [
+      "--bs-tertiary:$tc;",
+      "--bb-tertiary-dark:$tcd;",
+      "--bb-tertiary-light:$tct;",
+      "--bs-tertiary-rgb:$tcrgb;",
+      "--bs-quaternary:$qc;",
+      "--bb-quaternary-dark:$qcd;",
+      "--bb-quaternary-light:$qct;",
+      "--bs-quaternary-rgb:$qcrgb;",
+      "--bb-footer-bg:$color_footer;"
+    ];
+
+      $footer_height = theme_get_setting('bootstrap_barrio_footer_height') ?? 20;
+      $styles[] = "--bb-footer-height:{$footer_height}em;";
+      error_log(print_r($styles, true));
+      $existing_styles = $variables['html_attributes']->offsetGet('style');
+      $variables['html_attributes']->setAttribute('style', implode('', $styles) . ($existing_styles ? "," . $existing_styles: "") );
+  }
+
+}
