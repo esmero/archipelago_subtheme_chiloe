@@ -25,10 +25,13 @@ Named after Chiloé, a [mysterious](https://en.wikipedia.org/wiki/Chiloé_Archip
 
 ## Installation
 
-`composer require archipelago/archipelago_subtheme_chiloe` or if using the standard Archipelago Commons way
+`composer require archipelago/archipelago_subtheme_chiloe` 
+
+or if using the standard Archipelago Commons way via
+
 `docker exec -ti esmero-php bash -c "composer require archipelago/archipelago_subtheme_chiloe"`
 
-Enable and customize!
+Enable and customize using the UI.
 
 ## SASS
 
