@@ -1,0 +1,10 @@
+{
+	"name": "archipelago/archipelago_subtheme_chiloe",
+	"type": "drupal-theme",
+	"description": "Archipelago SASS Bootstrap Barrio Sub Theme made for good people.",
+	"homepage": "https://github.com/esmero/archipelago_subtheme_chiloe",
+	"license": "GPL-2.0+",
+	"require": {
+		"drupal/bootstrap_barrio": ">=5.5.6"
+	}
+}
