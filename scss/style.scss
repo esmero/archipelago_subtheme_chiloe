@@ -16,7 +16,18 @@ Description: Bootstrap 5 with Sass
 /* Off canvas */
 #CollapsingNavbarTop.offcanvas.show {
   top: var(--drupal-displace-offset-top);
-  background-color: inherit !important;
+  background-color: var(--bs-body-bg, white) !important;
+  padding: 1rem;
+  section.region-top-header-form {
+    nav:last-of-type {
+      margin-right: 0;
+    }
+}
+
+#CollapsingNavbar.offcanvas.show {
+  top: var(--drupal-displace-offset-top);
+  background-color: var(--bs-body-bg, white) !important;
+  padding: 1rem;
 }
 
 .site-footer {
@@ -629,8 +640,10 @@ Description: Bootstrap 5 with Sass
         z-index: 500;
       }
       section.region-top-header-form {
+        nav:last-of-type {
+            margin-right: 3rem;
+        }
         nav {
-          margin-right: 3rem;
         }
       }
     }
@@ -985,6 +998,10 @@ Description: Bootstrap 5 with Sass
       }
 
       /* The Mobile Navbar toggler */
+      .navbar-toggler-wrapper {
+        z-index:1000;
+      }
+
       .navbar-toggler {
         background-color: white;
         margin-bottom: 0.5rem;

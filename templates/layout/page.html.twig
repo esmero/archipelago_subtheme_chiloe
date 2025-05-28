@@ -91,19 +91,28 @@
            {% endif %}
            {{ page.top_header }}
            {%  if navbar_collapse_btn_data == "offcanvas" %}
-               <div class="d-flex flex-column position-absolute top-0 end-0 me-2 mt-2">
+               <div class="d-flex navbar-toggler-wrapper flex-column position-absolute top-0 end-0 me-2 mt-2">
               <button class="navbar-toggler collapsed ml-auto" type="button" data-bs-toggle="{{ navbar_collapse_btn_data }}" data-bs-target="#CollapsingNavbarTop" aria-controls="CollapsingNavbarTop" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
               <button class="navbar-toggler collapsed ml-auto" type="button" data-bs-toggle="{{ navbar_collapse_btn_data }}" data-bs-target="#CollapsingNavbar" aria-controls="CollapsingNavbar" aria-expanded="false" aria-label="Toggle Search"><span class="navbar-toggler-icon-search"></span></button>
                </div>
-         {% else %}
+           {% else %}
               <button class="navbar-toggler collapsed ml-auto" type="button" data-bs-toggle="{{ navbar_collapse_btn_data }}" data-bs-target=".to-be-collapsed" aria-controls="CollapsingNavbarTop CollapsingNavbar" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-         {% endif %}
+           {% endif %}
                 <div class="{{ navbar_collapse_class }} to-be-collapsed" id="CollapsingNavbarTop">
+               {% if navbar_offcanvas %}
+                    <div class="offcanvas-header">
+                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+               {% endif %}
                 {{ page.secondary_menu }}
                 {% if page.top_header_form %}
                   <div class="form-inline navbar-form ms-auto">
                     {{ page.top_header_form }}
                   </div>
+                {% endif %}
+                {% if navbar_offcanvas %}
+                    </div>
                 {% endif %}
               </div>
               {% if container_navbar %}
@@ -122,6 +131,12 @@
             </div>
             {% if page.primary_menu or page.header_form %}
              <div class="{{ navbar_collapse_class }} bg-white to-be-collapsed" id="CollapsingNavbar">
+                 {% if navbar_offcanvas %}
+                 <div class="offcanvas-header">
+                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                 </div>
+                 <div class="offcanvas-body">
+                 {% endif %}
                 <div class="{{ container }}">
                   <div class="row gx-2">
                     {% if page.primary_menu %}
@@ -138,6 +153,9 @@
                     {% endif %}
                   </div>
                 </div>
+               {% if navbar_offcanvas %}
+                 </div>
+               {% endif %}
               </div>
             {% endif %}
           </div>
