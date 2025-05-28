@@ -368,13 +368,7 @@ Description: Bootstrap 5 with Sass
   .region-content-top-flex {
     display:flex !important;
   }
-
-  /* Hides any top navbar link pointing to advanced-search */
-  #navbar-top {
-    .nav-link--advanced-search {
-      display:none;
-    }
-  }
+  
   .block-facets-summary {
     flex-basis: 60%;
     &:only-child {
