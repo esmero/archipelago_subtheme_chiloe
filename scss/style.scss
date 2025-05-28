@@ -1271,7 +1271,6 @@ Description: Bootstrap 5 with Sass
       padding-top: 0.5rem;
       border-top: none;
       .dropdown-item  {
-        padding: 0;
         display:flex;
         transition: background-color 0.25s linear;
         &.active {
