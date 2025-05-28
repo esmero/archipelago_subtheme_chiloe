@@ -758,10 +758,10 @@ Description: Bootstrap 5 with Sass
     nav.tabs ul {
       background: white;
       .nav-item.active a {
-        background: white;
+        background: var(--bs-body-bg,white);
       }
       .nav-item:not(.active) a {
-        background: #{$gray-100};
+        background: #{$gray-200};
         border-color: white;
       }
     }
