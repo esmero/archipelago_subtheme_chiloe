@@ -1615,14 +1615,14 @@ body.scrolled {
   .back-to-top {
     display: block;
     width: 4rem;
-    height: 3rem;
+    height: 4rem;
     border-top-left-radius: var(--bs-border-radius);
     border-top-right-radius: var(--bs-border-radius);
     position: fixed;
     right: 5%;
     bottom: 2%;
     z-index: 1234;
-    background-color: var(--bs-quaternary-rgb, #{$quaternary-shade-rgba});
+    background-color: rgba(var(--bs-quaternary-rgb, #{$quaternary-shade-rgba}),0.65);
     color: white;
     padding-top: 0.5em;
     text-align: center;
