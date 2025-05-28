@@ -299,26 +299,30 @@ function archipelago_subtheme_chiloe_preprocess_html(&$variables) {
     $gray200 = '#e9ecef';
     $gray800 = '#343a40';
     $white = '#fff';
+    $bc = '#000';
     $pc = theme_get_setting('bootstrap_barrio_base_primary_color') ?? '#2F3C7E';
     $pcrgb = _hex2rgb( $pc );
     $pcd = _color_luminance($pc, -0.15);
-    $bc = '#000';
     $pct = _getContrastColor($pc, $white, $bc);
     $sc = theme_get_setting('bootstrap_barrio_base_secondary_color') ?? '#FBEAEB';
     $scrgb = _hex2rgb( $sc );
     $scd = _color_luminance($sc, -0.15);
-    $sct = _getContrastColor($sc, $white, $gray800);
     $colors = [
       'white' => $white,
-      'black' => '#000',
+      'black' => $bc,
       'gray-200' => $gray200,
       'gray-800' => $gray800,
       'primary' => $pc,
       'secondary' => $sc,
     ];
-    $base = _get_color(theme_get_setting('bootstrap_barrio_body_color') ?? 'gray-800', $colors);
-    $colors['base'] = $base;
 
+    $bg = _get_color_archipelago_subtheme(theme_get_setting('bootstrap_barrio_body_bg_color') ?? 'white', $colors);
+    $h1 = _get_color_archipelago_subtheme(theme_get_setting('bootstrap_barrio_h1_color') ?? 'base', $colors);
+    $h2 = _get_color_archipelago_subtheme(theme_get_setting('bootstrap_barrio_h2_color') ?? 'base', $colors);
+    $h3 = _get_color_archipelago_subtheme(theme_get_setting('bootstrap_barrio_h3_color') ?? 'base', $colors);
+
+    $base = _get_color_archipelago_subtheme(theme_get_setting('bootstrap_barrio_body_color') ?? 'gray-800', $colors);
+    $colors['base'] = $base;
     $tc = theme_get_setting('bootstrap_barrio_base_tertiary_color') ?? '#61D39D';
     $tcrgb = _hex2rgb( $tc );
     $tcd = _color_luminance($tc, -0.15);
@@ -348,13 +352,42 @@ function archipelago_subtheme_chiloe_preprocess_html(&$variables) {
       "--bb-quaternary-dark:$qcd;",
       "--bb-quaternary-light:$qct;",
       "--bs-quaternary-rgb:$qcrgb;",
-      "--bb-footer-bg:$color_footer;"
+      "--bb-footer-bg:$color_footer;",
+      "--bs-primary:$pc;",
+      "--bb-primary-dark:$pcd;",
+      "--bb-primary-light:$pct;",
+      "--bs-primary-rgb:$pcrgb;",
+      "--bs-secondary:$sc;",
+      "--bb-secondary-dark:$scd;",
+      "--bs-secondary-rgb:$scrgb;",
+      "--bs-link-color:$pc;",
+      "--bs-link-hover-color:$pcd;",
+      "--bs-body-color:$base;",
+      "--bs-body-bg:$bg;",
+      "--bb-h1-color:$h1;",
+      "--bb-h2-color:$h2;",
+      "--bb-h3-color:$h3;",
     ];
 
       $footer_height = theme_get_setting('bootstrap_barrio_footer_height') ?? 20;
       $styles[] = "--bb-footer-height:{$footer_height}em;";
-      $existing_styles = $variables['html_attributes']->offsetGet('style');
-      $variables['html_attributes']->setAttribute('style', implode('', $styles) . ($existing_styles ? "," . $existing_styles: "") );
+
+      $variables['html_attributes']->setAttribute('style', implode('', $styles));
   }
 
+}
+
+/**
+ *
+ * Original function in Barrio makes really no sense.
+ * @param $color
+ * @param $colors
+ *
+ * @return mixed
+ */
+function _get_color_archipelago_subtheme($color, $colors) {
+  if (isset($colors[$color])) {
+    return $colors[$color];
+  }
+  return $color;
 }

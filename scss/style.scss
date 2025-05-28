@@ -789,6 +789,7 @@ Description: Bootstrap 5 with Sass
       /* Remove padding bottom and test.
        padding-bottom: 1rem;
        */
+      margin-bottom: 0.5rem;
       a.views-display-link {
         visibility: hidden;
         @extend .visually-hidden;
