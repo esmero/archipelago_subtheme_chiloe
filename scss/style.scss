@@ -591,8 +591,8 @@ Description: Bootstrap 5 with Sass
   /* Rest of the pages Page exception */
   .archipelago-chiloe-theme {
     .pagination {
-        --bs-pagination-active-bg: #b0defc;
-        --bs-pagination-active-color: rgba(var(--bs-link-color-rgb),var(--bs-link-opacity,1));
+        --bs-pagination-active-bg: rgba(var(--bs-link-color-rgb),var(--bs-link-opacity,1));
+        --bs-pagination-active-color: white;
         --bs-pagination-active-border-color: transparent;
         --bs-pagination-hover-border-color: rgba(var(--bs-link-color-rgb),var(--bs-link-opacity,1));
     }
@@ -741,6 +741,10 @@ Description: Bootstrap 5 with Sass
     }
 
     /* Nav tabs are grey by default */
+    .tab-pane {
+      padding-top: 1rem;
+    }
+
     nav.tabs ul {
       background: white;
       .nav-item.active a {
@@ -1582,7 +1586,17 @@ Description: Bootstrap 5 with Sass
         }
       }
     }
-
+    .carousel {
+      .carousel-inner {
+        border-radius: var(--bs-border-radius-lg) !important;
+      }
+      .carousel-caption {
+        border-radius: var(--bs-border-radius-lg) !important;
+        h1,h2,h3,h4,span,div {
+          border-radius: var(--bs-border-radius-lg) !important;
+        }
+      }
+    }
   }
 }
 

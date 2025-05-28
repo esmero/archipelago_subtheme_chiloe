@@ -122,30 +122,27 @@ $carousel-indicator-transition: opacity 0.5s, margin-right 0.5s;
     }
 
     .btn-secondary {
-      --bs-btn-bg: transparent;
+      /*--bs-btn-bg: transparent;
       --bs-btn-color:var(--bs-link-color, #{$link-color});
       --bs-btn-active-color: white;
       --bs-btn-active-bg: var(--bb-secondary-light, #{$accent-light});
       --bs-btn-border-color: var(--bs-link-color, #{$link-color});
-      --bs-btn-hover-color:  var(--bs-link-hover-color, #{$quaternary-shade});
-      --bs-btn-hover-bg: var(--bs-link-color, #{$link-color});
-      --bs-btn-hover-border-color: var(--bs-link-color, #{$link-color});
+      --bs-btn-hover-color:  var(--bs-link-hover-color, #{$quaternary-shade});*/
+      --bs-btn-hover-bg: var(--bb-secondary-light, #{$accent-light});
+      --bs-btn-hover-border-color: var(--bb-secondary-light, #{$accent-light});
 
       &:hover {
-        //--bs-btn-active-bg: #{$link-color};
-        //--bs-btn-active-color: #{$white};
-
         a {
-          // color: #{$quaternary-shade};
+          color: var(--bs-link-color-hover, #{$link-color});
           text-decoration: none;
         }
       }
 
       a {
         text-decoration: none;
-
+        color: var(--bs-link-color, #{$link-color});
         &:hover {
-          // color: $quaternary-shade;
+          color: var(--bs-link-color-hover, #{$link-color});
           text-decoration: none;
         }
 
