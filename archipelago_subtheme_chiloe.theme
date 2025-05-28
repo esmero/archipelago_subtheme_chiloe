@@ -153,18 +153,11 @@ function archipelago_subtheme_chiloe_form_system_theme_settings_alter(&$form, Fo
       '#options' => [
         'gray-800' => t('Dark gray'),
         'black' => t('Black'),
+        'bluegray-800' => t('Blueish Dark Gray'),
       ],
     ];
 
-    $form['colors']['scheme']['color_container']['bootstrap_barrio_body_color'] = [
-      '#type' => 'select',
-      '#title' => t('Body color'),
-      '#default_value' => theme_get_setting('bootstrap_barrio_body_color') ?? 'gray-800',
-      '#options' => [
-        'gray-800' => t('Dark gray'),
-        'black' => t('Black'),
-      ],
-    ];
+
     $form['colors']['scheme']['color_container']['bootstrap_barrio_body_bg_color'] = [
       '#type' => 'select',
       '#title' => t('Body Background Color'),
@@ -172,6 +165,8 @@ function archipelago_subtheme_chiloe_form_system_theme_settings_alter(&$form, Fo
       '#options' => [
         'white' => t('White'),
         'gray-200' => t('Light gray'),
+        'gray-100' => t('Extra Light gray'),
+        'warm-white' => t('Warm White'),
       ],
     ];
     $form['colors']['scheme']['color_container']['bootstrap_barrio_footer_bg_color'] = [
@@ -269,7 +264,7 @@ function archipelago_subtheme_chiloe_form_system_theme_settings_alter(&$form, Fo
  */
 function archipelago_subtheme_chiloe_preprocess_breadcrumb(&$variables){
   // Remove 'Home' from breadcrumb trail.
-  if (count($variables['breadcrumb'])) {
+  if (count($variables['breadcrumb']) == 1) {
     array_shift($variables['breadcrumb']);
   }
   $variables['#cache']['contexts'][] = 'url';
@@ -310,10 +305,13 @@ function archipelago_subtheme_chiloe_preprocess_html(&$variables) {
     $colors = [
       'white' => $white,
       'black' => $bc,
+      'gray-100' => 'rgb(244, 249, 249)',
       'gray-200' => $gray200,
       'gray-800' => $gray800,
+      'bluegray-800' => 'rgb(59, 73, 82)',
       'primary' => $pc,
       'secondary' => $sc,
+      'warm-white' => '#fcfafa',
     ];
 
     $bg = _get_color_archipelago_subtheme(theme_get_setting('bootstrap_barrio_body_bg_color') ?? 'white', $colors);

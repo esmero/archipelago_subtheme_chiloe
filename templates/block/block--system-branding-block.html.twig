@@ -18,13 +18,14 @@
     <a href="{{ path('<front>') }}" title="{{ site_name }}" rel="home" class="navbar-brand d-flex flex-column stretched-link">
       {% if site_logo %}
         <img src="{{ site_logo }}" alt="{{ 'Home'|t }}" class="img-fluid d-flex align-top" />
-      {% else %}
-        <span class="ml-2 d-md-flex justify-content-left">{{ site_name }}</span>
+      {% endif %}
+      {% if site_name %}
+        <span class="ml-2 mt-2 d-md-flex align-self-end justify-content-right">{{ site_name }}</span>
       {% endif %}
     </a>
   {% endif %}
   {% if site_slogan %}
-    <div class="d-inline-flex align-center site-name-slogan">
+    <div class="ml-2 mt-2 mb-2 d-md-flex align-self-end justify-content-right site-name-slogan">
       {{ site_slogan }}
     </div>
   {% endif %}
