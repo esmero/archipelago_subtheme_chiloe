@@ -18,10 +18,12 @@ Description: Bootstrap 5 with Sass
   top: var(--drupal-displace-offset-top);
   background-color: var(--bs-body-bg, white) !important;
   padding: 1rem;
+
   section.region-top-header-form {
     nav:last-of-type {
       margin-right: 0;
     }
+  }
 }
 
 #CollapsingNavbar.offcanvas.show {
