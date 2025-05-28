@@ -11,7 +11,10 @@ Description: Bootstrap 5 with Sass
 .bg-inverse {
   background: var(--bs-primary, #{$primary}) !important;
 }
-
+// Solves RAW JSON pushing auto colum widths in ADO displays
+pre {
+  white-space: pre-wrap;
+}
 
 /* Off canvas */
 #CollapsingNavbarTop.offcanvas.show {
