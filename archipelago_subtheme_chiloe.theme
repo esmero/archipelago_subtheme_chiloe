@@ -275,6 +275,21 @@ function archipelago_subtheme_chiloe_preprocess_breadcrumb(&$variables){
   $variables['#cache']['contexts'][] = 'url';
 }
 
+function archipelago_subtheme_chiloe_preprocess_page(&$variables) {
+  switch (theme_get_setting('bootstrap_barrio_navbar_offcanvas')) {
+    case 'offcanvas-collapse':
+      $variables['navbar_offcanvas'] = TRUE;
+      $variables['navbar_collapse_class'] = "offcanvas offcanvas-top";
+      $variables['navbar_collapse_btn_data'] = "offcanvas";
+      break;
+    default:
+      $variables['navbar_offcanvas'] = FALSE;
+      $variables['navbar_collapse_class'] = 'collapse navbar-collapse justify-content-start';
+      $variables['navbar_collapse_btn_data'] = "collapse";
+  }
+}
+
+
 function archipelago_subtheme_chiloe_preprocess_html(&$variables) {
   // Color settings
   bootstrap_barrio_preprocess_html($variables);
@@ -316,7 +331,6 @@ function archipelago_subtheme_chiloe_preprocess_html(&$variables) {
       'tertiary' => $tc,
       'quaternary' => $qc,
     ];
-    error_log(print_r($colors,true));
     $color_footer_key = theme_get_setting('bootstrap_barrio_footer_bg_color') ?? 'tertiary';
     if (isset($colors[$color_footer_key])) {
       $color_footer = $colors[$color_footer_key];
@@ -339,7 +353,6 @@ function archipelago_subtheme_chiloe_preprocess_html(&$variables) {
 
       $footer_height = theme_get_setting('bootstrap_barrio_footer_height') ?? 20;
       $styles[] = "--bb-footer-height:{$footer_height}em;";
-      error_log(print_r($styles, true));
       $existing_styles = $variables['html_attributes']->offsetGet('style');
       $variables['html_attributes']->setAttribute('style', implode('', $styles) . ($existing_styles ? "," . $existing_styles: "") );
   }

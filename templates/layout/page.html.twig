@@ -86,12 +86,19 @@
       {% block head %}
         {% if page.secondary_menu or page.top_header or page.top_header_form %}
           <nav{{ navbar_top_attributes.addClass(['navbar-expand-lg']) }}>
-            {% if container_navbar %}
+           {% if container_navbar %}
             <div class="{{ container }}">
-              {% endif %}
-              {{ page.top_header }}
-              <button class="navbar-toggler collapsed ml-auto" type="button" data-bs-toggle="{{ navbar_collapse_btn_data }}" data-bs-target=".to-be-collapsed" aria-controls="CollapsingNavbarTop" aria-expanded="false" aria-label="Toggle Top navigation"><span class="navbar-toggler-icon"></span></button>
-              <div class="{{ navbar_collapse_class }}  to-be-collapsed" id="CollapsingNavbarTop">
+           {% endif %}
+           {{ page.top_header }}
+           {%  if navbar_collapse_btn_data == "offcanvas" %}
+               <div class="d-flex flex-column position-absolute top-0 end-0 me-2 mt-2">
+              <button class="navbar-toggler collapsed ml-auto" type="button" data-bs-toggle="{{ navbar_collapse_btn_data }}" data-bs-target="#CollapsingNavbarTop" aria-controls="CollapsingNavbarTop" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+              <button class="navbar-toggler collapsed ml-auto" type="button" data-bs-toggle="{{ navbar_collapse_btn_data }}" data-bs-target="#CollapsingNavbar" aria-controls="CollapsingNavbar" aria-expanded="false" aria-label="Toggle Search"><span class="navbar-toggler-icon-search"></span></button>
+               </div>
+         {% else %}
+              <button class="navbar-toggler collapsed ml-auto" type="button" data-bs-toggle="{{ navbar_collapse_btn_data }}" data-bs-target=".to-be-collapsed" aria-controls="CollapsingNavbarTop CollapsingNavbar" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+         {% endif %}
+                <div class="{{ navbar_collapse_class }} to-be-collapsed" id="CollapsingNavbarTop">
                 {{ page.secondary_menu }}
                 {% if page.top_header_form %}
                   <div class="form-inline navbar-form ms-auto">

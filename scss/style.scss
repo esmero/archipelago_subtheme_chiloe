@@ -12,6 +12,13 @@ Description: Bootstrap 5 with Sass
   background: var(--bs-primary, #{$primary}) !important;
 }
 
+
+/* Off canvas */
+#CollapsingNavbarTop.offcanvas.show {
+  top: var(--drupal-displace-offset-top);
+  background-color: inherit !important;
+}
+
 .site-footer {
   display: flex;
   flex-flow: column;
@@ -222,6 +229,13 @@ Description: Bootstrap 5 with Sass
 
 /*  overrides down from md  */
 @include media-breakpoint-down(md) {
+  nav.tabs ul {
+    flex-direction: column;
+    --bs-nav-tabs-border-radius: 0;
+    .nav-item:not(:first-child) {
+      padding-left: 0;
+    }
+  }
 
   /* hide any sort option for search. Uses too much space
    */
@@ -239,9 +253,7 @@ Description: Bootstrap 5 with Sass
     padding-left: calc(var(--bs-gutter-x) * 0.125);
     padding-right: calc(var(--bs-gutter-x) * 0.125);
   }
-  .navbar-toggler {
-    font-size: 0.75em;
-  }
+
   #navbar-main {
     .nav-item--advanced-search {
       display:none;
@@ -288,6 +300,7 @@ Description: Bootstrap 5 with Sass
       width: fit-content;
     }
   }
+
 }
 
 /* overrides down from lg  */
@@ -457,9 +470,6 @@ Description: Bootstrap 5 with Sass
 }
 
 :root {
-
-
-
   #navbar-main {
     &.bg-primary {
       --bs-heading-color: #{$white};
@@ -754,10 +764,6 @@ Description: Bootstrap 5 with Sass
         background: #{$gray-100};
         border-color: white;
       }
-      .nav-item:not(:first-child) {
-        padding-left: 0.5rem;
-      }
-
     }
     /* Margin bottom to any Node rendered entity */
     div.content div[data-history-node-id]{
@@ -979,12 +985,32 @@ Description: Bootstrap 5 with Sass
 
       /* The Mobile Navbar toggler */
       .navbar-toggler {
-        border:none;
-        .navbar-toggler-icon {
-          background-color: white;
-          background-image: none;
-          -webkit-mask-image: var(--bs-navbar-toggler-icon-bg);
-          mask-image: var(--bs-navbar-toggler-icon-bg);
+        background-color: white;
+        margin-bottom: 0.5rem;
+        .navbar-toggler-icon-search {
+          display: inline-block;
+          width: 1.5em;
+          height: 1.5em;
+          vertical-align: middle;
+          -webkit-background-size: 100% 100%;
+          background-size: 100%;
+          &:before {
+            width: 2.5rem;
+            height: 2.5rem;
+            content: "\f52a";
+            font-size: 1.25rem;
+            font-family: bootstrap-icons !important;
+            background-repeat: no-repeat;
+            -webkit-background-size: contain;
+            background-size: contain;
+            position: absolute;
+            left: 0.375rem;
+            padding-top: 0.25rem;
+            color: var(--bs-navbar-color);
+            //padding: 0.625rem 0.5rem;
+            pointer-events: none;
+          }
+
         }
       }
       padding-bottom: 0;
@@ -1643,8 +1669,6 @@ body:not(.scrolled) {
     text-align: center;
   }
 }
-
-/* Hamilton decoration */
 
 .explore_links_decoration {
 
