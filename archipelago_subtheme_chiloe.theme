@@ -300,9 +300,13 @@ function archipelago_subtheme_chiloe_preprocess_html(&$variables) {
     $pcrgb = _hex2rgb( $pc );
     $pcd = _color_luminance($pc, -0.15);
     $pct = _getContrastColor($pc, $white, $bc);
+    $pct_text = archipelago_subtheme_chiloe_getcontrastColor($pc);
     $sc = theme_get_setting('bootstrap_barrio_base_secondary_color') ?? '#FBEAEB';
     $scrgb = _hex2rgb( $sc );
     $scd = _color_luminance($sc, -0.15);
+    $sct = _color_luminance($sc, 0.15);
+    $sct_text = archipelago_subtheme_chiloe_getcontrastColor($sc);
+
     $colors = [
       'white' => $white,
       'black' => $bc,
@@ -358,6 +362,7 @@ function archipelago_subtheme_chiloe_preprocess_html(&$variables) {
       "--bs-primary-rgb:$pcrgb;",
       "--bs-secondary:$sc;",
       "--bb-secondary-dark:$scd;",
+      "--bb-secondary-light:$sct;",
       "--bs-secondary-rgb:$scrgb;",
       "--bs-link-color:$pc;",
       "--bs-link-hover-color:$pcd;",
@@ -366,6 +371,8 @@ function archipelago_subtheme_chiloe_preprocess_html(&$variables) {
       "--bb-h1-color:$h1;",
       "--bb-h2-color:$h2;",
       "--bb-h3-color:$h3;",
+      "--bb-primary-text: $pct_text;",
+      "--bb-secondary-text: $sct_text;"
     ];
 
       $footer_height = theme_get_setting('bootstrap_barrio_footer_height') ?? 20;
@@ -389,4 +396,49 @@ function _get_color_archipelago_subtheme($color, $colors) {
     return $colors[$color];
   }
   return $color;
+}
+
+/**
+ * Given a color, get the best contrasting color
+ * @See/@attribution to https://github.com/tomloprod/colority
+ *
+ * @param $hexColor
+ *
+ * @return string
+ */
+function archipelago_subtheme_chiloe_getcontrastColor($hexColor): string {
+  // hexColor RGB
+  $R1 = hexdec(substr($hexColor, 1, 2));
+  $G1 = hexdec(substr($hexColor, 3, 2));
+  $B1 = hexdec(substr($hexColor, 5, 2));
+
+  // Black RGB
+  $blackColor = "#000000";
+  $R2BlackColor = hexdec(substr($blackColor, 1, 2));
+  $G2BlackColor = hexdec(substr($blackColor, 3, 2));
+  $B2BlackColor = hexdec(substr($blackColor, 5, 2));
+
+  // Calc contrast ratio
+  $L1 = 0.2126 * pow($R1 / 255, 2.2) +
+    0.7152 * pow($G1 / 255, 2.2) +
+    0.0722 * pow($B1 / 255, 2.2);
+
+  $L2 = 0.2126 * pow($R2BlackColor / 255, 2.2) +
+    0.7152 * pow($G2BlackColor / 255, 2.2) +
+    0.0722 * pow($B2BlackColor / 255, 2.2);
+
+  $contrastRatio = 0;
+  if ($L1 > $L2) {
+    $contrastRatio = (int)(($L1 + 0.05) / ($L2 + 0.05));
+  } else {
+    $contrastRatio = (int)(($L2 + 0.05) / ($L1 + 0.05));
+  }
+
+  // If contrast is more than 5, return black color
+  if ($contrastRatio > 5) {
+    return '#000000';
+  } else {
+    // if not, return white color.
+    return '#FFFFFF';
+  }
 }

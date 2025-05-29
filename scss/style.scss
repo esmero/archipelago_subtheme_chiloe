@@ -196,7 +196,7 @@ pre {
   padding-left: var(--bs-navbar-brand-margin-end);
   align-items: flex-end;
   margin-right: 1.75rem;
-  font-size: x-small;
+  font-size: small;
 }
 
 .card-group img {
@@ -339,7 +339,7 @@ pre {
   #navbar-top .navbar-nav{
     flex-direction: row;
     height: 87px;
-    align-items: center;
+    align-items: start;
     column-gap: map-get($spacers, 1); // Same as px-4
   }
 
@@ -629,7 +629,10 @@ pre {
         text-rendering: auto;
       }*/
       --bs-breadcrumb-divider: ">";
-      --bs-breadcrumb-divider-color: #{$white};
+      --bs-breadcrumb-divider-color: var(--bs-body-color, #{$body-color});
+      -moz-osx-font-smoothing: grayscale;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: auto;
     }
     #navbar-top {
       padding: 0 0.5rem;
@@ -816,7 +819,7 @@ pre {
         flex-direction: column;
         align-self: center;
         span {
-          font-size: 1.5rem;
+          font-size: 1.2rem;
         }
       }
     }
@@ -826,7 +829,7 @@ pre {
         flex-direction: column;
         align-self: center;
         span {
-          font-size: 1.5rem;
+          font-size: 1rem;
         }
       }
     }
@@ -911,7 +914,21 @@ pre {
               }
               .js-form-item {
                 display: flex;
-                flex-grow: 1;
+                &:not(.js-form-type-select) {
+                  flex-grow: 1;
+                }
+              }
+              button:not(.form-submit) {
+                align-self: self-start;
+                max-width: 15rem;
+                text-overflow: ellipsis;
+                overflow: hidden;
+              }
+              select {
+                align-self: self-start;
+                max-width: 10rem;
+                text-overflow: ellipsis;
+                overflow: hidden;
               }
             }
           }
@@ -973,6 +990,8 @@ pre {
       .views-exposed-form {
         .form-row {
           display: flex;
+          flex-grow: 0;
+          flex-shrink: 1;
           row-gap: 1rem;
           column-gap: 0.275rem;
           button:not(.form-submit) {
@@ -987,9 +1006,14 @@ pre {
           }
         }
         .form-type-textfield {
-          flex-grow: 0;
+          flex-grow: 1;
+          flex-shrink: 0;
           min-height: 0;
           height:100%;
+        }
+        .form-type-select {
+          flex-grow: 0;
+          flex-shrink: 1;
         }
         .form-actions.mb-3 {
           margin-bottom: 0 !important;
