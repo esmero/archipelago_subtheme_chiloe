@@ -395,6 +395,7 @@ pre {
   #navbar-main .views-exposed-form form {
     display: flex;
     align-items: center;
+    justify-content: end;
     height: auto;
     .form-wrapper {
       display: flex;
@@ -920,13 +921,13 @@ pre {
               }
               button:not(.form-submit) {
                 align-self: self-start;
-                max-width: 15rem;
+                max-width: 19rem;
                 text-overflow: ellipsis;
                 overflow: hidden;
               }
               select {
                 align-self: self-start;
-                max-width: 10rem;
+                max-width: 19rem;
                 text-overflow: ellipsis;
                 overflow: hidden;
               }
@@ -1390,6 +1391,7 @@ pre {
       justify-content: flex-start;
       flex-wrap: nowrap;
       align-items: flex-start;
+      justify-content: end;
       flex-direction: row;
       flex-shrink: 1;
       --bs-gutter-x: 0;
