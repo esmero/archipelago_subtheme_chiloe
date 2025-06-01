@@ -176,7 +176,12 @@ pre {
   }
 }
 
-
+/* Popper for Annotations */
+.popper-background {
+  background: var(--bs-secondary, #{$gray-600});
+  color: var(--bb-secondary-text, #{$white});
+  z-index:2000;
+}
 
 
 .site-footer__top {
