@@ -66,4 +66,8 @@ input[type=button], input[type=submit] {
   padding-right: 0;
 }
 
+.form-checkbox.form-check-input:checked {
+  background-color: var(--bs-secondary, #{$accent-shade});
+  border-color: var(--bs-secondary, #{$accent-shade});
+}
 

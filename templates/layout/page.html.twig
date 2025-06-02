@@ -270,6 +270,22 @@
             {% endif %}
           </div>
         </div>
+        {#  Side bar off canvas for bottom 12 column flex #}
+        {% if page.sidebar_first_bottom_flex %}
+          <div id="bottom_flex_offcanvas_toggler_container" class="{{ container }}">
+            <button class="ml-auto btn btn-tertiary text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#BottomFlexNavbar" aria-controls="BottomFlexNavbar" aria-expanded="false" aria-label="Toggle Options"><span class="navbar-toggler-icon navbar-toggler-icon-flex"></span></button>
+          </div>
+         <div class="offcanvas offcanvas-start bg-white pb-2" id="BottomFlexNavbar">
+             <div class="offcanvas-header">
+               <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+             </div>
+             <div class="offcanvas-body">
+               <div class="row gx-2">
+             {{ page.sidebar_first_bottom_flex }}
+               </div>
+             </div>
+          </div>
+        {% endif %}
         <div id="content-bottom-flex" class="{{ container }}">
             <div class="region d-flex flex-nowrap flex-row align-self-stretch justify-content-center">
                   {{ page.content_bottom_flex }}
