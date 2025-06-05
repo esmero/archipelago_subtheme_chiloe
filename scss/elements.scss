@@ -71,3 +71,9 @@ input[type=button], input[type=submit] {
   border-color: var(--bs-secondary, #{$accent-shade});
 }
 
+.archipelago-chiloe-theme table.sticky-header thead {
+  position: sticky;
+  z-index: 500;
+  top: 0;
+}
+
