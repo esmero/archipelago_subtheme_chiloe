@@ -23,13 +23,13 @@ libraries-override:
         misc/dialog/off-canvas/css/reset.css: false
         misc/dialog/off-canvas/css/base.css: false
 regions:
-  top_header: 'Top header'
+  top_header: 'Top header (branding)'
+  secondary_menu: 'Top header Left menu'
   top_header_form: 'Top header form'
   header: Header
   header_right: 'Header right'
   header_form: 'Header form'
-  primary_menu: 'Top menu'
-  secondary_menu: 'Bottom Left menu'
+  primary_menu: 'Primary menu (header/left)'
   page_top: 'Page top'
   page_bottom: 'Page bottom'
   highlighted: Highlighted
