@@ -2,8 +2,7 @@ name: Archipelago (Chiloé) Boostrap Barrio SASS
 type: theme
 description: 'Archipelago Sub Theme based on Bootstrap 5/SCSS.'
 # version: VERSION
-core: 10.x
-core_version_requirement: ^10
+core_version_requirement: ^10 || ^11
 base theme: bootstrap_barrio
 logo: 'logo.png'
 
