@@ -21,6 +21,9 @@ libraries-override:
       base:
         misc/dialog/off-canvas/css/reset.css: false
         misc/dialog/off-canvas/css/base.css: false
+  core/drupal.progress:
+    js:
+      misc/progress.js: js/overrides/progress.js
 regions:
   top_header: 'Top header (branding)'
   secondary_menu: 'Top header Left menu'
