@@ -15,11 +15,13 @@
    */
   Drupal.theme.progressBar = function (id) {
     const escapedId = Drupal.checkPlain(id);
-    return (`<div id="${escapedId}" class="progress" role="progressbar"`+
-      `aria-live="polite" aria-label="Progress" aria-valuenow="0" `+
-      `aria-valuemin="0" aria-valuemax="100">` +
-      `<div class="progress-bar bg-info"></div>` +
-      `</div>`);
+    const escapedId_info = escapedId + '_message_info'
+    return (`<div id="${escapedId}" class="progress w-100">` +
+      `<div role="progressbar"`+
+      ` aria-live="polite" aria-label="Progress" aria-valuenow="0"`+
+      ` aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-striped progress-bar-animated"></div>` +
+      `</div>`
+    );
   };
 
   /**
@@ -72,21 +74,19 @@
        */
       setProgress(percentage, message, label) {
         if (percentage >= 0 && percentage <= 100) {
-          $(this.element)
-            .find('div.progress-bar')
-            .each(function () {
-              this.style.width = `${percentage}%`;
-            });
           if (typeof label == 'string') {
             label.trimEnd() + ' ';
           }
           $(this.element)
-            .find('div.div.progress-bar')
-            .html(`${label + percentage}%`);
-          $(this.element).attr('aria-valuenow', percentage);
+            .find('div.progress-bar')
+            .attr('aria-valuenow', percentage)
+            .css( "width", `${percentage}%`)
+            .attr('aria-description', message)
+            .attr('aria-label', label)
+            .html(`${percentage}%`)
+          // Set by Drupal somewhere ...
+          $(this.element).parent().filter('.progress-bar-message').html(label + '<br>' + message);
         }
-        $(this.element).attr('aria-description', message);
-        $(this.element).attr('aria-label', label);
         if (this.updateCallback) {
           this.updateCallback(percentage, message, this);
         }
