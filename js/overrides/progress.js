@@ -85,7 +85,7 @@
             .attr('aria-label', label)
             .html(`${percentage}%`)
           // Set by Drupal somewhere ...
-          $(this.element).parent().filter('.progress-bar-message').html(label + '<br>' + message);
+          $(this.element).parent().parent().find('.progress-bar-message').html(label + '<br>' + message);
         }
         if (this.updateCallback) {
           this.updateCallback(percentage, message, this);
