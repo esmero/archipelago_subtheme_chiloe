@@ -13,6 +13,9 @@ libraries-override:
   bootstrap_barrio/affix:
     js:
       js/affix.js: js/overrides/affix-delayed.js
+  bootstrap_barrio/tabledrag:
+    js:
+      js/tabledrag.js: js/overrides/tabledrag.js
   facets_searchbox_widget/searchbox:
     js:
       js/searchbox.js: js/overrides/searchbox.js
