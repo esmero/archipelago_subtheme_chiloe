@@ -299,6 +299,7 @@ function archipelago_subtheme_chiloe_preprocess_html(&$variables) {
     $pc = theme_get_setting('bootstrap_barrio_base_primary_color') ?? '#2F3C7E';
     $pcrgb = _hex2rgb( $pc );
     $pcd = _color_luminance($pc, -0.15);
+    $pcdrgb = _hex2rgb( $pcd );
     $pct = _getContrastColor($pc, $white, $bc);
     $pct_text = archipelago_subtheme_chiloe_getcontrastColor($pc);
     $sc = theme_get_setting('bootstrap_barrio_base_secondary_color') ?? '#FBEAEB';
@@ -368,6 +369,7 @@ function archipelago_subtheme_chiloe_preprocess_html(&$variables) {
       "--bs-link-color:$pc;",
       "--bs-link-color-rgb:$pcrgb;",
       "--bs-link-hover-color:$pcd;",
+      "--bs-link-hover-color-rgb:$pcdrgb",
       "--bs-body-color:$base;",
       "--bs-body-bg:$bg;",
       "--bs-body-bg-rgb:$bgrgb;",
