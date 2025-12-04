@@ -96,9 +96,14 @@ $carousel-indicator-transition: opacity 0.5s, margin-right 0.5s;
   .archipelago-chiloe-theme {
     // Overrides from root see https://getbootstrap.com/docs/5.1/customize/css-variables/
     --bs-light-rgb: var(--bs-tertiary-rgb, #{$accent-light-rgb});
-    --bs-btn-hover-bg: #{darken($primary-shade, 10%)};
+    --bs-btn-hover-bg: var(--bb-primary-dark,#{darken($primary-shade, 10%)});
     --bs-secondary-rgb: #{$brand-primary};
-    --bs-link-color: var(--bs-link-color, #{$link-color});
+
+    // Overrides from module .theme, -bb-link-color
+    --bs-link-color: var(--bb-link-color, #{$link-color});
+    .pagination {
+      --bs-pagination-hover-bg: var(--bb-pagination-hover-bg, #{$link-color});
+    }
     --bs-btn-bg: var(--bs-primary, #{$primary-shade});
 
     .nav-pills {
