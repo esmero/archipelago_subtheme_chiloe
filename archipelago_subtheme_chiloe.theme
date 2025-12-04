@@ -297,13 +297,13 @@ function archipelago_subtheme_chiloe_preprocess_html(&$variables) {
     $white = '#fff';
     $bc = '#000';
     $pc = theme_get_setting('bootstrap_barrio_base_primary_color') ?? '#2F3C7E';
-    $pcrgb = _hex2rgb( $pc );
+    $pcrgb = _hex2rgbArchipelago( $pc );
     $pcd = _color_luminance($pc, -0.15);
-    $pcdrgb = _hex2rgb( $pcd );
+    $pcdrgb = _hex2rgbArchipelago( $pcd );
     $pct = _getContrastColor($pc, $white, $bc);
     $pct_text = archipelago_subtheme_chiloe_getcontrastColor($pc);
     $sc = theme_get_setting('bootstrap_barrio_base_secondary_color') ?? '#FBEAEB';
-    $scrgb = _hex2rgb( $sc );
+    $scrgb = _hex2rgbArchipelago( $sc );
     $scd = _color_luminance($sc, -0.15);
     $sct = _color_luminance($sc, 0.15);
     $sct_text = archipelago_subtheme_chiloe_getcontrastColor($sc);
@@ -326,14 +326,14 @@ function archipelago_subtheme_chiloe_preprocess_html(&$variables) {
     $h3 = _get_color_archipelago_subtheme(theme_get_setting('bootstrap_barrio_h3_color') ?? 'base', $colors);
 
     $base = _get_color_archipelago_subtheme(theme_get_setting('bootstrap_barrio_body_color') ?? 'gray-800', $colors);
-    $bgrgb = _hex2rgb($bg);
+    $bgrgb = _hex2rgbArchipelago($bg);
     $colors['base'] = $base;
     $tc = theme_get_setting('bootstrap_barrio_base_tertiary_color') ?? '#61D39D';
-    $tcrgb = _hex2rgb( $tc );
+    $tcrgb = _hex2rgbArchipelago( $tc );
     $tcd = _color_luminance($tc, -0.15);
     $tct =_color_luminance($tc, 0.1);
     $qc = theme_get_setting('bootstrap_barrio_base_quaternary_color') ?? '#FE2076';
-    $qcrgb = _hex2rgb( $qc );
+    $qcrgb = _hex2rgbArchipelago( $qc );
     $qcd = _color_luminance($qc, -0.15);
     $qct = _color_luminance($qc, 0.1);
     $colors = $colors + [
@@ -447,4 +447,30 @@ function archipelago_subtheme_chiloe_getcontrastColor($hexColor): string {
     // if not, return white color.
     return '#FFFFFF';
   }
+}
+
+/**
+ * Covert hex to rgb color.
+ */
+function _hex2rgbArchipelago( $color ) {
+  $output = "0, 0, 0";
+  $color = ltrim($color, '#');
+  if (strlen($color) == 3 || strlen($color) == 6) {
+    $split_hex_color = str_split($color, str_len($color / 3));
+    $r = hexdec($split_hex_color[0]);
+    $g = hexdec($split_hex_color[1]);
+    $b = hexdec($split_hex_color[2]);
+
+    $output = "$r, $g, $b";
+  }
+  return $output;
+}
+
+/**
+ * Covert hex to rgba color.
+ */
+function _hex2rgbaArchipelago( $color, $opacity ) {
+  $rgbcolor = _hex2rgbArchipelago($color);
+  $output = "rgba({$rgbcolor}, $opacity)";
+  return $output;
 }
