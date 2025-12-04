@@ -456,7 +456,7 @@ function _hex2rgbArchipelago( $color ) {
   $output = "0, 0, 0";
   $color = ltrim($color, '#');
   if (strlen($color) == 3 || strlen($color) == 6) {
-    $split_hex_color = str_split($color, str_len($color / 3));
+    $split_hex_color = str_split($color, strlen($color / 3));
     $r = hexdec($split_hex_color[0]);
     $g = hexdec($split_hex_color[1]);
     $b = hexdec($split_hex_color[2]);
