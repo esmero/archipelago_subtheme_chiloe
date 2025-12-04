@@ -369,7 +369,7 @@ function archipelago_subtheme_chiloe_preprocess_html(&$variables) {
       "--bs-link-color:$pc;",
       "--bs-link-color-rgb:$pcrgb;",
       "--bs-link-hover-color:$pcd;",
-      "--bs-link-hover-color-rgb:$pcdrgb",
+      "--bs-link-hover-color-rgb:$pcdrgb;",
       "--bs-body-color:$base;",
       "--bs-body-bg:$bg;",
       "--bs-body-bg-rgb:$bgrgb;",
