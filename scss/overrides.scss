@@ -155,3 +155,21 @@ archipelago-subtheme #drupal-off-canvas-wrapper details {
   background-color: unset;
 }
 
+.archipelago-chiloe-theme .ui-dialog .ui-dialog-titlebar-close {
+  background: none !important;
+  border: none !important;
+  text-indent: 0 !important;
+  color: #000;
+  font-size: 24px;
+  line-height: 1;
+  opacity: 0.5;
+}
+
+.archipelago-chiloe-theme .ui-dialog .ui-dialog-titlebar-close:before {
+  content: "×" !important;
+  display: block;
+}
+
+.archipelago-chiloe-theme .ui-dialog .ui-dialog-titlebar-close:hover {
+  opacity: 0.8;
+}
