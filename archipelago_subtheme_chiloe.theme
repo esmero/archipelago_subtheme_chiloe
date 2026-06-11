@@ -219,7 +219,7 @@ function archipelago_subtheme_chiloe_form_system_theme_settings_alter(&$form, Fo
         'secondary' => t('Secondary color'),
         'tertiary' => t('Tertiary color'),
         'quaternary' => t('Quaternary color'),
-        ]
+      ]
     ];
   }
 
@@ -288,7 +288,11 @@ function archipelago_subtheme_chiloe_preprocess_page(&$variables) {
 function archipelago_subtheme_chiloe_preprocess_html(&$variables) {
   // Color settings
   bootstrap_barrio_preprocess_html($variables);
+  // We have to empty this.
+  $variables['html_attributes']->setAttribute('style', '');
+}
 
+function archipelago_subtheme_chiloe_page_attachments_alter(array &$attachments) {
   if (theme_get_setting('bootstrap_barrio_enable_color')) {
     // Sadly i have to duplicate this if we want to be able to customize the footer
     $gray200 = '#e0e3e3';
@@ -297,13 +301,13 @@ function archipelago_subtheme_chiloe_preprocess_html(&$variables) {
     $white = '#fff';
     $bc = '#000';
     $pc = theme_get_setting('bootstrap_barrio_base_primary_color') ?? '#2F3C7E';
-    $pcrgb = _hex2rgbArchipelago( $pc );
+    $pcrgb = _hex2rgbArchipelago($pc);
     $pcd = _color_luminance($pc, -0.15);
-    $pcdrgb = _hex2rgbArchipelago( $pcd );
-    $pct = _getContrastColor($pc, $white, $bc);
+    $pcdrgb = _hex2rgbArchipelago($pcd);
+    $pct = _color_luminance($pc, 0.15);
     $pct_text = archipelago_subtheme_chiloe_getcontrastColor($pc);
     $sc = theme_get_setting('bootstrap_barrio_base_secondary_color') ?? '#FBEAEB';
-    $scrgb = _hex2rgbArchipelago( $sc );
+    $scrgb = _hex2rgbArchipelago($sc);
     $scd = _color_luminance($sc, -0.15);
     $sct = _color_luminance($sc, 0.15);
     $sct_text = archipelago_subtheme_chiloe_getcontrastColor($sc);
@@ -329,17 +333,17 @@ function archipelago_subtheme_chiloe_preprocess_html(&$variables) {
     $bgrgb = _hex2rgbArchipelago($bg);
     $colors['base'] = $base;
     $tc = theme_get_setting('bootstrap_barrio_base_tertiary_color') ?? '#61D39D';
-    $tcrgb = _hex2rgbArchipelago( $tc );
+    $tcrgb = _hex2rgbArchipelago($tc);
     $tcd = _color_luminance($tc, -0.15);
-    $tct =_color_luminance($tc, 0.1);
+    $tct = _color_luminance($tc, 0.1);
     $qc = theme_get_setting('bootstrap_barrio_base_quaternary_color') ?? '#FE2076';
-    $qcrgb = _hex2rgbArchipelago( $qc );
+    $qcrgb = _hex2rgbArchipelago($qc);
     $qcd = _color_luminance($qc, -0.15);
     $qct = _color_luminance($qc, 0.1);
     $colors = $colors + [
-      'tertiary' => $tc,
-      'quaternary' => $qc,
-    ];
+        'tertiary' => $tc,
+        'quaternary' => $qc,
+      ];
     $color_footer_key = theme_get_setting('bootstrap_barrio_footer_bg_color') ?? 'tertiary';
     if (isset($colors[$color_footer_key])) {
       $color_footer = $colors[$color_footer_key];
@@ -383,12 +387,20 @@ function archipelago_subtheme_chiloe_preprocess_html(&$variables) {
       "--bb-secondary-text: $sct_text;"
     ];
 
-      $footer_height = theme_get_setting('bootstrap_barrio_footer_height') ?? 20;
-      $styles[] = "--bb-footer-height:{$footer_height}em;";
-
-      $variables['html_attributes']->setAttribute('style', implode('', $styles));
+    $footer_height = theme_get_setting('bootstrap_barrio_footer_height') ?? 20;
+    $styles[] = "--bb-footer-height:{$footer_height}em;";
+    $inline_style_tag = implode(" ", $styles);
+    $inline_style_tag = ':root, [data-bs-theme="light"] {' . $inline_style_tag . '}';
+    $attachments['#attached']['html_head'][] = [
+      [
+        '#type' => 'html_tag',
+        '#tag' => 'script',
+        '#value' => $inline_style_tag
+      ],
+      'archipelago_subtheme_chiloe',
+    ];
   }
-
+  //$variables['html_attributes']->setAttribute('style', implode('', $styles));
 }
 
 /**
