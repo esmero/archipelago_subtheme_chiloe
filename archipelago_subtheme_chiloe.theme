@@ -290,6 +290,7 @@ function archipelago_subtheme_chiloe_preprocess_html(&$variables) {
   bootstrap_barrio_preprocess_html($variables);
   // We have to empty this.
   $variables['html_attributes']->setAttribute('style', '');
+  $variables['html_attributes']->setAttribute('data-bs-theme', 'light');
 }
 
 function archipelago_subtheme_chiloe_page_attachments_alter(array &$attachments) {
@@ -390,17 +391,17 @@ function archipelago_subtheme_chiloe_page_attachments_alter(array &$attachments)
     $footer_height = theme_get_setting('bootstrap_barrio_footer_height') ?? 20;
     $styles[] = "--bb-footer-height:{$footer_height}em;";
     $inline_style_tag = implode(" ", $styles);
-    $inline_style_tag = ':root, [data-bs-theme="light"] {' . $inline_style_tag . '}';
+    $inline_style_tag = ':root,
+[data-bs-theme=light] .archipelago-chiloe-theme {' . $inline_style_tag . '}';
     $attachments['#attached']['html_head'][] = [
       [
         '#type' => 'html_tag',
-        '#tag' => 'script',
+        '#tag' => 'style',
         '#value' => $inline_style_tag
       ],
       'archipelago_subtheme_chiloe',
     ];
   }
-  //$variables['html_attributes']->setAttribute('style', implode('', $styles));
 }
 
 /**
