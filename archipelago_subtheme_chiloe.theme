@@ -257,6 +257,22 @@ function archipelago_subtheme_chiloe_form_system_theme_settings_alter(&$form, Fo
     '#default_value' => theme_get_setting('bootstrap_barrio_footer_height') ?? '20',
   ];
 
+  $form['logo']['settings']['logo_dark_path'] = [
+    '#type' => 'textfield',
+    '#title' => t('Path to custom logo for Dark Mode Theme'),
+    '#default_value' => theme_get_setting('logo_dark_path'),
+  ];
+  $form['logo']['settings']['logo_dark_upload'] = [
+    '#type' => 'file',
+    '#title' => t('Upload Dark logo image'),
+    '#description' => t("If you don't have direct file access to the server, use this field to upload your Dark Mode logo."),
+    '#upload_validators' => [
+      'FileExtension' => [
+        'extensions' => 'png gif jpg jpeg apng svg',
+      ],
+    ],
+  ];
+
 }
 
 /**
@@ -305,7 +321,7 @@ function archipelago_subtheme_chiloe_page_attachments_alter(array &$attachments)
     $pcrgb = _hex2rgbArchipelago($pc);
     $pcd = _color_luminance($pc, -0.15);
     $pcdrgb = _hex2rgbArchipelago($pcd);
-    $pct = _color_luminance($pc, 0.15);
+    $pct = _color_luminance($pc, 0.75);
     $pct_text = archipelago_subtheme_chiloe_getcontrastColor($pc);
     $sc = theme_get_setting('bootstrap_barrio_base_secondary_color') ?? '#FBEAEB';
     $scrgb = _hex2rgbArchipelago($sc);
@@ -388,11 +404,47 @@ function archipelago_subtheme_chiloe_page_attachments_alter(array &$attachments)
       "--bb-secondary-text: $sct_text;"
     ];
 
+    $styles_dark = [
+      "--bs-tertiary:$tc;",
+      "--bb-tertiary-dark:$tcd;",
+      "--bb-tertiary-light:$tct;",
+      "--bs-tertiary-rgb:$tcrgb;",
+      "--bs-quaternary:$qc;",
+      "--bb-quaternary-dark:$qcd;",
+      "--bb-quaternary-light:$qct;",
+      "--bs-quaternary-rgb:$qcrgb;",
+      "--bb-footer-bg:$color_footer;",
+      "--bs-primary:$pc;",
+      "--bb-primary-dark:$pcd;",
+      "--bb-primary-light:$pct;",
+      "--bs-primary-rgb:$pcrgb;",
+      "--bs-secondary:$sc;",
+      "--bb-secondary-dark:$scd;",
+      "--bb-secondary-light:$sct;",
+      "--bs-secondary-rgb:$scrgb;",
+      "--bs-link-color:$pc;",
+      "--bb-link-color:$pc;",
+      "--bs-link-color-rgb:$pcrgb;",
+      "--bb-link-color-rgb:$pcrgb;",
+      "--bs-link-hover-color:$pcd;",
+      "--bs-link-hover-color-rgb:$pcdrgb;",
+      "--bb-pagination-hover-bg:$pcd;",
+      "--bb-h1-color:$h1;",
+      "--bb-h2-color:$h2;",
+      "--bb-h3-color:$h3;",
+    ];
+
     $footer_height = theme_get_setting('bootstrap_barrio_footer_height') ?? 20;
     $styles[] = "--bb-footer-height:{$footer_height}em;";
+    $styles_dark[] = "--bb-footer-height:{$footer_height}em;";
+    $styles_dark[] = "img.site-logo-light { display:none !important;}";
     $inline_style_tag = implode(" ", $styles);
+    $inline_style_tag_dark = implode(" ", $styles_dark);
     $inline_style_tag = ':root,
-[data-bs-theme=light] .archipelago-chiloe-theme {' . $inline_style_tag . '}';
+[data-bs-theme=light] .archipelago-chiloe-theme {' . $inline_style_tag . ' img.site-logo-dark { display:none !important;}}';
+    $inline_style_tag = $inline_style_tag . '
+[data-bs-theme=dark] .archipelago-chiloe-theme {' . $inline_style_tag_dark . 'img.site-logo-light { display:none !important;} img.site-logo-dark { display:inherit !important;}}}';
+
     $attachments['#attached']['html_head'][] = [
       [
         '#type' => 'html_tag',
@@ -400,6 +452,15 @@ function archipelago_subtheme_chiloe_page_attachments_alter(array &$attachments)
         '#value' => $inline_style_tag
       ],
       'archipelago_subtheme_chiloe',
+    ];
+    // This is added just to ensure we do not have a flickering during theme changes
+    $attachments['#attached']['html_head'][] = [
+      [
+        '#type' => 'html_tag',
+        '#tag' => 'script',
+        '#value' => 'const storedTheme = localStorage.getItem("theme");const isSystemThemeSetToDark = window.matchMedia("(prefers-color-scheme: dark)").matches;if (!storedTheme) { if (isSystemThemeSetToDark) { document.documentElement.setAttribute("data-bs-theme", theme);}}else if (storedTheme) { document.documentElement.setAttribute("data-bs-theme", storedTheme);}'
+      ],
+      'archipelago_subtheme_chiloe_themejs',
     ];
   }
 }
@@ -488,4 +549,22 @@ function _hex2rgbaArchipelago( $color, $opacity ) {
   $rgbcolor = _hex2rgbArchipelago($color);
   $output = "rgba({$rgbcolor}, $opacity)";
   return $output;
+}
+
+/**
+ * Implements hook_preprocess_block().
+ */
+function archipelago_subtheme_chiloe_preprocess_block(&$variables) {
+  // Target the core branding block explicitly
+  if ($variables['plugin_id'] == 'system_branding_block') {
+    /** @var \Drupal\Core\File\FileUrlGeneratorInterface $file_url_generator */
+    $file_url_generator = \Drupal::service('file_url_generator');
+   $logo_path_dark = theme_get_setting('logo_dark_path');
+    if ($logo_path_dark) {
+      $variables['site_logo_dark'] = $file_url_generator->generateString($logo_path_dark);
+    }
+    else {
+      $variables['site_logo_dark'] = NULL;
+    }
+  }
 }
