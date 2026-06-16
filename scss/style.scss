@@ -16,6 +16,19 @@ pre {
   white-space: pre-wrap;
 }
 
+.archipelago-chiloe-theme {
+  .ajax-progress-throbber.throbber {
+    background-image: url("../images/throbber-active.svg");
+  }
+
+  input.form-autocomplete {
+    background-image: url("../images/throbber-inactive.svg");
+  }
+  input.form-autocomplete.ui-autocomplete-loading {
+    background-image: url("../images/throbber-active.svg");
+  }
+}
+
 /* Off canvas */
 #CollapsingNavbarTop.offcanvas.show {
   top: var(--drupal-displace-offset-top, 0);
@@ -780,7 +793,7 @@ pre {
     }
 
     nav.tabs ul {
-      background: white;
+      background: var(--bs-body-bg, white);
       .nav-item.active a {
         background: var(--bs-body-bg,white);
       }

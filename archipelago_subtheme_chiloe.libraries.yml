@@ -5,6 +5,7 @@ global-styling:
     js/bootstrap.min.js: { weight: -48 }
     js/barrio.js: {}
     js/custom.js: {}
+    js/theme-switcher.js: {}
   css:
     component:
       css/style.css: {}
@@ -13,3 +14,4 @@ global-styling:
     - core/jquery
     - core/drupal
     - core/popperjs
+    - core/once

@@ -17,7 +17,10 @@
   {% if site_logo or site_name %}
     <a href="{{ path('<front>') }}" title="{{ site_name }}" rel="home" class="navbar-brand d-flex flex-column stretched-link">
       {% if site_logo %}
-        <img src="{{ site_logo }}" alt="{{ 'Home'|t }}" class="img-fluid d-flex align-top" />
+        <img src="{{ site_logo }}" alt="{{ 'Home'|t }}" class="img-fluid d-flex align-top {{ site_logo_dark ? 'site-logo-light' :'' }} }}" />
+      {% endif %}
+      {% if site_logo_dark %}
+        <img src="{{ site_logo_dark }}" alt="{{ 'Home'|t }}" class="img-fluid d-flex align-top site-logo-dark" />
       {% endif %}
       {% if site_name %}
         <span class="ml-2 mt-2 d-md-flex align-self-end justify-content-right">{{ site_name }}</span>

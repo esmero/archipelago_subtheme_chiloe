@@ -16,7 +16,7 @@ Named after Chiloé, a [mysterious](https://en.wikipedia.org/wiki/Chiloé_Archip
   -   Overrides for many of Archipelago's most used theme templates (facets, etc)
   -   Pop, eye hurting, bright colors!
   -   Custom JS
-- Layout is handle by Bootstrap.
+- Layout is handled by Bootstrap.
 - Two columns, with configurable widths.
 - Fixed and fluid layouts.
 - Configurable header behavior, using Bootstrap "fixed to top".
