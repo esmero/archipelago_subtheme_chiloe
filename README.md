@@ -1,4 +1,4 @@
-## Archipelago Sub Theme Chiloé: Bootstrap 5 theme for Archipelago/Drupal 10/11
+## Archipelago Sub Theme Chiloé: Bootstrap 5 theme for Archipelago/Drupal 11
 
 This is a [Bootstrap Barrio](https://www.drupal.org/project/bootstrap_sass) (Bootstrap 5) subtheme using SCSS/SASS.
 Bootstrap 5 is a sleek, intuitive, and powerful front-end framework 
