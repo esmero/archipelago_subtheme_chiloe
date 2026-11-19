@@ -29,7 +29,7 @@ libraries-override:
       misc/progress.js: js/overrides/progress.js
   contextual/drupal.contextual-links:
     js:
-      js/contextual.js: js/contextual.js
+      js/contextual.js:  js/overrides/contextual.js
 regions:
   top_header: 'Top header (branding)'
   secondary_menu: 'Top header Left menu'
