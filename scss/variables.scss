@@ -120,7 +120,7 @@ $carousel-indicator-transition: opacity 0.5s, margin-right 0.5s;
     }
 
     .btn-primary:active, .btn-primary:focus:active {
-      --bs-btn-color: var(--bs-link-color, #{$link-color});
+      --bs-btn-color: var(--bb-primary-text, #{$link-color});
       --bs-btn-active-color: #{white};
       --bs-btn-active-bg:  var(--bs-quaternary, #{$quaternary-shade});
       --bs-btn-active-border-color: #{white};
@@ -128,58 +128,79 @@ $carousel-indicator-transition: opacity 0.5s, margin-right 0.5s;
     }
 
     .btn-secondary {
-      /*--bs-btn-bg: transparent;
-      --bs-btn-color:var(--bs-link-color, #{$link-color});
-      --bs-btn-active-color: white;
-      --bs-btn-active-bg: var(--bb-secondary-light, #{$accent-light});
-      --bs-btn-border-color: var(--bs-link-color, #{$link-color});
-      --bs-btn-hover-color:  var(--bs-link-hover-color, #{$quaternary-shade});*/
+      --bs-btn-color: var(--bb-secondary-text, #{$white});
+      --bs-btn-bg: var(--bs-secondary, #{$tertiary-shade});
+      --bs-btn-active-color: -var(--bb-secondary-text, #{$white});
+      --bs-btn-active-bg: var(--bb-secondary-light, #{$accent-alternate-shade});
+      --bs-btn-border-color: transparent;
       --bs-btn-hover-bg: var(--bb-secondary-light, #{$accent-light});
       --bs-btn-hover-border-color: var(--bb-secondary-light, #{$accent-light});
-
       &:hover {
+        --bs-btn-hover-bg: var(--bb-secondary-light, #{$accent-light});
+        --bs-btn-hover-border-color: var(--bb-secondary-light, #{$accent-light});
         a {
-          color: var(--bs-link-color-hover, #{$link-color});
           text-decoration: none;
         }
       }
 
       a {
         text-decoration: none;
-        color: var(--bs-link-color, #{$link-color});
         &:hover {
-          color: var(--bs-link-color-hover, #{$link-color});
+          color: var(--bb-secondary-text, #{$link-color});
           text-decoration: none;
         }
-
       }
     }
 
     .btn-tertiary {
-      --bs-btn-color: white;
+      --bs-btn-color: var(--bb-tertiary-text, #{$white});
       --bs-btn-bg: var(--bs-tertiary, #{$tertiary-shade});
-      --bs-btn-active-color: white;
+      --bs-btn-active-color: -var(--bb-tertiary-text, #{$white});
       --bs-btn-active-bg: var(--bb-tertiary-light, #{$accent-alternate-shade});
       --bs-btn-border-color: transparent;
       &:hover {
         --bs-btn-active-bg: var(--bs-link-hover-color, #{$link-color});
         --bs-btn-active-color: #{$white};
+        --bs-btn-hover-bg: var(--bb-tertiary-light, #{$accent-alternate-shade});
+        --bs-btn-hover-border-color: var(--bb-tertiary-light, #{$accent-alternate-shade});
         a {
-          color: var(--bs-link-color, #{$link-color});
           text-decoration: none;
         }
       }
 
       a {
         text-decoration: none;
-        color: white;
-
         &:hover {
-          color: var(--bs-link-color, #{$link-color});
+          color: var(--bb-tertiary-text, #{$link-color});
           text-decoration: none;
         }
       }
 
+    }
+
+    .btn-quaternary {
+      --bs-btn-color: var(--bb-quaternary-text, #{$white});
+      --bs-btn-bg: var(--bs-quaternary, #{$quaternary-shade});
+      --bs-btn-active-color: -var(--bb-quaternarytext, #{$white});
+      --bs-btn-active-bg: var(--bb-quaternary-light, #{$accent-alternate-shade});
+      --bs-btn-border-color: transparent;
+      &:hover {
+        --bs-btn-active-bg: var(--bs-link-hover-color, #{$link-color});
+        --bs-btn-active-color: #{$white};
+        --bs-btn-hover-bg: var(--bb-quaternary-light, #{$accent-alternate-shade});
+        --bs-btn-hover-border-color: var(--bb-quaternary-light, #{$accent-alternate-shade});
+        a {
+          text-decoration: none;
+        }
+      }
+
+      a {
+        text-decoration: none;
+        &:hover {
+          color: var(--bb-quaternary-text, #{$link-color});
+          text-decoration: none;
+        }
+      }
     }
 
     .list-group {
