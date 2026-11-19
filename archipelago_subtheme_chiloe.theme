@@ -322,12 +322,16 @@ function archipelago_subtheme_chiloe_page_attachments_alter(array &$attachments)
     $pcd = _color_luminance($pc, -0.15);
     $pcdrgb = _hex2rgbArchipelago($pcd);
     $pct = _color_luminance($pc, 0.75);
+    $pctrgb = _hex2rgbArchipelago($pct);
     $pct_text = archipelago_subtheme_chiloe_getcontrastColor($pc);
+    $pct_text_darktheme = archipelago_subtheme_chiloe_getcontrastColor($pct);
     $sc = theme_get_setting('bootstrap_barrio_base_secondary_color') ?? '#FBEAEB';
     $scrgb = _hex2rgbArchipelago($sc);
     $scd = _color_luminance($sc, -0.15);
-    $sct = _color_luminance($sc, 0.15);
+    $sct = _color_luminance($sc, 0.2);
+    $sctrgb = _hex2rgbArchipelago($sct);
     $sct_text = archipelago_subtheme_chiloe_getcontrastColor($sc);
+    $sct_text_darktheme = archipelago_subtheme_chiloe_getcontrastColor($sct);
 
     $colors = [
       'white' => $white,
@@ -351,15 +355,19 @@ function archipelago_subtheme_chiloe_page_attachments_alter(array &$attachments)
     $bgrgb = _hex2rgbArchipelago($bg);
     $colors['base'] = $base;
     $tc = theme_get_setting('bootstrap_barrio_base_tertiary_color') ?? '#61D39D';
-    $tct_text = archipelago_subtheme_chiloe_getcontrastColor($tc);
     $tcrgb = _hex2rgbArchipelago($tc);
     $tcd = _color_luminance($tc, -0.15);
-    $tct = _color_luminance($tc, 0.1);
+    $tct = _color_luminance($tc, 0.2);
+    $tctrgb = _hex2rgbArchipelago($tct);
+    $tct_text = archipelago_subtheme_chiloe_getcontrastColor($tc);
+    $tct_text_darktheme = archipelago_subtheme_chiloe_getcontrastColor($tct);
     $qc = theme_get_setting('bootstrap_barrio_base_quaternary_color') ?? '#FE2076';
-    $qct_text = archipelago_subtheme_chiloe_getcontrastColor($tc);
     $qcrgb = _hex2rgbArchipelago($qc);
     $qcd = _color_luminance($qc, -0.15);
-    $qct = _color_luminance($qc, 0.1);
+    $qct = _color_luminance($qc, 0.2);
+    $qctrgb = _hex2rgbArchipelago($qct);
+    $qct_text = archipelago_subtheme_chiloe_getcontrastColor($tc);
+    $qct_text_darktheme = archipelago_subtheme_chiloe_getcontrastColor($tct);
     $colors = $colors + [
         'tertiary' => $tc,
         'quaternary' => $qc,
@@ -408,36 +416,40 @@ function archipelago_subtheme_chiloe_page_attachments_alter(array &$attachments)
       "--bb-tertiary-text: $tct_text;",
       "--bb-quaternary-text: $qct_text;"
     ];
+    // For dark our contrast color is based on the lightest color of the set
 
     $styles_dark = [
       "--bs-tertiary:$tct;",
       "--bb-tertiary-dark:$tct;",
       "--bb-tertiary-light:$tct;",
-      "--bs-tertiary-rgb:$tcrgb;",
+      "--bs-tertiary-rgb:$tctrgb;",
       "--bs-quaternary:$qct;",
       "--bb-quaternary-dark:$qct;",
       "--bb-quaternary-light:$qct;",
-      "--bs-quaternary-rgb:$qcrgb;",
+      "--bs-quaternary-rgb:$qctrgb;",
       "--bb-footer-bg:$color_footer;",
       "--bs-primary:$pct;",
       "--bb-primary-dark:$pct;",
       "--bb-primary-light:$pct;",
-      "--bs-primary-rgb:$pcrgb;",
+      "--bs-primary-rgb:$pctrgb;",
       "--bs-secondary:$sct;",
       "--bb-secondary-dark:$sct;",
       "--bb-secondary-light:$sct;",
-      "--bs-secondary-rgb:$scrgb;",
+      "--bs-secondary-rgb:$sctrgb;",
       "--bs-link-color:$pct;",
       "--bb-link-color:$pct;",
-      "--bs-link-color-rgb:$pcrgb;",
-      "--bb-link-color-rgb:$pcrgb;",
+      "--bs-link-color-rgb:$pctrgb;",
       "--bs-link-hover-color:$pct;",
-      "--bs-link-hover-color-rgb:$pcdrgb;",
+      "--bs-link-hover-color-rgb:$pctrgb;",
       "--bb-pagination-hover-bg:$pcd;",
       "--bs-body-color:$gray100;",
       "--bb-h1-color:$h1;",
       "--bb-h2-color:$h2;",
       "--bb-h3-color:$h3;",
+      "--bb-primary-text: $pct_text_darktheme;",
+      "--bb-secondary-text: $sct_text_darktheme;",
+      "--bb-tertiary-text: $tct_text_darktheme;",
+      "--bb-quaternary-text: $qct_text_darktheme;"
     ];
 
     $footer_height = theme_get_setting('bootstrap_barrio_footer_height') ?? 20;
