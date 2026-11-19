@@ -116,8 +116,8 @@
           $(this).detach().appendTo("#main-breadcrumbs");
         });
       }
-      /* Deals with Selects to Drop Downs */
-      if ($(context).is('.view') || context == document || $(context).is('.views-exposed-form')) {
+      /* Deals with Selects to Dropdowns */
+      if ($(context).is('.view') || context == document || $(context).is('.views-exposed-form') ||  $(context).is('.block-format-strawberryfield-views')) {
         // Observe accordions that have Leaflet inside. If so, on show trigger a global resize event
         // Depends on Leaflet 1.9.4
 
@@ -131,9 +131,9 @@
             })
           }
         });
-
+        const possible_select_boxes = once('attache_select_todropdown', '.views-exposed-form .form-select', context);
         // Only act on selects in exposed forms for now.
-        $('.views-exposed-form .form-select').each(function(i, e) {
+        $(possible_select_boxes).each(function(i, e) {
           if (!($(e).data('convert') == 'no')) {
             $(e).hide().removeClass('form-select');
             let selected = $(e).get(0).selectedIndex;
@@ -180,9 +180,7 @@
             var dropdownList = linkList.map(function (menuItemLinks) {
               menuItemLinks.addEventListener('click',function (f) {
                 let hidden = select.querySelector('input[type=hidden]');
-                console.log(this);
                 if (hidden && this.dataset?.value !== "undefined") {
-                  console.log('clicked');
                   hidden.value = this.dataset.value;
                   let toggle = select.querySelector('.dropdown-toggle');
                   toggle.textContent = this.textContent;
@@ -191,12 +189,10 @@
                   let autosubmit =  hidden.closest('form').querySelector('[data-bef-auto-submit-click]');
                   if (autosubmit) {
                     autosubmit.click();
-                    console.log('autosubmit');
                   }
                   else {
-                    console.log('firing change event');
                     const ChangeEvent = new Event('change', { 'bubbles': true });
-                    console.log(hidden.dispatchEvent(ChangeEvent));
+                    hidden.dispatchEvent(ChangeEvent);
                   }
                 }
                 f.preventDefault();
@@ -306,4 +302,4 @@
         );
     }
   }
-})(jQuery, Drupal);
+})(jQuery, Drupal, once);
