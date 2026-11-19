@@ -142,7 +142,7 @@ $carousel-indicator-transition: opacity 0.5s, margin-right 0.5s;
       }
 
       a {
-        --bs-link-color: var(--bb-secondary-text, #{$white});
+        --bs-link-color-rbg: rgb(from var(--bb-secondary-text,#{$link-color}));
         text-decoration: none;
         &:hover {
           color: var(--bb-secondary-text, #{$link-color});
@@ -166,7 +166,7 @@ $carousel-indicator-transition: opacity 0.5s, margin-right 0.5s;
       }
 
       a {
-        --bs-link-color: var(--bb-tertiary-text, #{$white});
+        --bs-link-color-rbg: rgb(from var(--bb-tertiary-text, #{$link-color}));
         text-decoration: none;
         &:hover {
           color: var(--bb-tertiary-text, #{$link-color});
@@ -191,7 +191,7 @@ $carousel-indicator-transition: opacity 0.5s, margin-right 0.5s;
       }
 
       a {
-        --bs-link-color: var(--bb-quaternary-text, #{$white});
+        --bs-link-color-rbg: rgb(from var(--bb-quaternary-text, #{$link-color}));
         text-decoration: none;
         &:hover {
           color: var(--bb-quaternary-text, #{$link-color});
