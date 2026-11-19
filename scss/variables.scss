@@ -133,8 +133,6 @@ $carousel-indicator-transition: opacity 0.5s, margin-right 0.5s;
       --bs-btn-active-color: -var(--bb-secondary-text, #{$white});
       --bs-btn-active-bg: var(--bb-secondary-light, #{$accent-alternate-shade});
       --bs-btn-border-color: transparent;
-      --bs-btn-hover-bg: var(--bb-secondary-light, #{$accent-light});
-      --bs-btn-hover-border-color: var(--bb-secondary-light, #{$accent-light});
       &:hover {
         --bs-btn-hover-bg: var(--bb-secondary-light, #{$accent-light});
         --bs-btn-hover-border-color: var(--bb-secondary-light, #{$accent-light});
@@ -144,6 +142,7 @@ $carousel-indicator-transition: opacity 0.5s, margin-right 0.5s;
       }
 
       a {
+        --bs-link-color: var(--bb-secondary-text, #{$white});
         text-decoration: none;
         &:hover {
           color: var(--bb-secondary-text, #{$link-color});
@@ -159,8 +158,6 @@ $carousel-indicator-transition: opacity 0.5s, margin-right 0.5s;
       --bs-btn-active-bg: var(--bb-tertiary-light, #{$accent-alternate-shade});
       --bs-btn-border-color: transparent;
       &:hover {
-        --bs-btn-active-bg: var(--bs-link-hover-color, #{$link-color});
-        --bs-btn-active-color: #{$white};
         --bs-btn-hover-bg: var(--bb-tertiary-light, #{$accent-alternate-shade});
         --bs-btn-hover-border-color: var(--bb-tertiary-light, #{$accent-alternate-shade});
         a {
@@ -169,6 +166,7 @@ $carousel-indicator-transition: opacity 0.5s, margin-right 0.5s;
       }
 
       a {
+        --bs-link-color: var(--bb-tertiary-text, #{$white});
         text-decoration: none;
         &:hover {
           color: var(--bb-tertiary-text, #{$link-color});
@@ -185,8 +183,6 @@ $carousel-indicator-transition: opacity 0.5s, margin-right 0.5s;
       --bs-btn-active-bg: var(--bb-quaternary-light, #{$accent-alternate-shade});
       --bs-btn-border-color: transparent;
       &:hover {
-        --bs-btn-active-bg: var(--bs-link-hover-color, #{$link-color});
-        --bs-btn-active-color: #{$white};
         --bs-btn-hover-bg: var(--bb-quaternary-light, #{$accent-alternate-shade});
         --bs-btn-hover-border-color: var(--bb-quaternary-light, #{$accent-alternate-shade});
         a {
@@ -195,6 +191,7 @@ $carousel-indicator-transition: opacity 0.5s, margin-right 0.5s;
       }
 
       a {
+        --bs-link-color: var(--bb-quaternary-text, #{$white});
         text-decoration: none;
         &:hover {
           color: var(--bb-quaternary-text, #{$link-color});
