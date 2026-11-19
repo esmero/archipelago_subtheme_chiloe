@@ -347,6 +347,7 @@ function archipelago_subtheme_chiloe_page_attachments_alter(array &$attachments)
     $h3 = _get_color_archipelago_subtheme(theme_get_setting('bootstrap_barrio_h3_color') ?? 'base', $colors);
 
     $base = _get_color_archipelago_subtheme(theme_get_setting('bootstrap_barrio_body_color') ?? 'gray-800', $colors);
+    $base_dark = $gray100;
     $bgrgb = _hex2rgbArchipelago($bg);
     $colors['base'] = $base;
     $tc = theme_get_setting('bootstrap_barrio_base_tertiary_color') ?? '#61D39D';
@@ -433,6 +434,7 @@ function archipelago_subtheme_chiloe_page_attachments_alter(array &$attachments)
       "--bs-link-hover-color:$pcd;",
       "--bs-link-hover-color-rgb:$pcdrgb;",
       "--bb-pagination-hover-bg:$pcd;",
+      "--bs-body-color:$gray100;",
       "--bb-h1-color:$h1;",
       "--bb-h2-color:$h2;",
       "--bb-h3-color:$h3;",
