@@ -1,0 +1,12 @@
+/**
+ * @file
+ * Visual styles for alerts.
+ */
+.alert-wrapper.position-fixed {
+  max-height: 75vh;
+}
+
+.alert svg {
+  max-width: 2rem;
+  max-height: 2rem;
+}
