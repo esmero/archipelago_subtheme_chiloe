@@ -51,7 +51,7 @@
               localStorage.setItem("theme", theme);
             }
           }
-          
+
           const isSystemThemeSetToDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
           const isSystemThemeSetToDarkSaved = getPreferredTheme();
           // set toggler position based on system theme
