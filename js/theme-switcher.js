@@ -51,16 +51,7 @@
               localStorage.setItem("theme", theme);
             }
           }
-
-          // add listener to toggle theme with Shift + D
-          if (themeToggler) {
-            document.addEventListener("keydown", (e) => {
-              if (e.shiftKey && e.key === "D") {
-                themeToggler.checked = !themeToggler.checked;
-                toggleTheme(themeToggler.checked);
-              }
-            });
-          }
+          
           const isSystemThemeSetToDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
           const isSystemThemeSetToDarkSaved = getPreferredTheme();
           // set toggler position based on system theme
