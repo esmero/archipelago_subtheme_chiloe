@@ -27,6 +27,11 @@ pre {
   input.form-autocomplete.ui-autocomplete-loading {
     background-image: url("../images/throbber-active.svg");
   }
+  // Defines a minimal width in specific for Tables that have autocompletes like AMI reconciliation edit
+  table input.form-autocomplete {
+    min-width:10rem;
+  }
+
 }
 
 /* Off canvas */
@@ -1708,6 +1713,12 @@ pre {
 }
 
 /* webforms */
+
+.webform-multiple-table td input[type="image"] + input[type="image"] {
+  margin-top: 2px;
+  margin-left: 0px;
+}
+
 
 .webform-actions {
   button {
